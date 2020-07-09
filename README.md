@@ -1,7 +1,7 @@
 # ASCIIGrupo4
-Projeto para seleção treinee da ASCII empresa junior
+Projeto para seleção trainee da ASCII empresa junior
 
-## Projeto Plantoria
+## Projeto Plantfolio Ascii
 Consiste de um app que controla o processo de cultivo de plantas
 
 ## Principais Tecnologias utilizadas
