@@ -23,6 +23,22 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/favorites',async (req,res)=>{
+  try {    
+    const plants = await Plant.find({ assignedToUser: req.userId, isFavorite: true})
+      .populate(['user', 'comments'])
+      .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
+      //com 'createdAt' vem o mais antigo primeiro
+    return res.status(200).json({plants});
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: true,
+      message: 'nao foi possivel obter as plantas favoritas'
+    });
+  }
+});
+
 router.get('/:plantId', async (req, res) => {
   try {
     const plant = await Plant.findById(req.params.plantId).populate(['user', 'comments']);
@@ -132,7 +148,6 @@ router.put('/favorite/:plantId', async (req, res) => {
     });
   }
 });
-
 
 
 module.exports = app => app.use('/api/plants', router);
