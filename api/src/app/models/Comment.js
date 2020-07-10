@@ -1,30 +1,27 @@
 const mongoose = require('../../database'); 
 const bcrypt = require('bcryptjs');
 
-const ProjectSchema = new mongoose.Schema({
-  title: {
-    type: String,
+const CommentSchema = new mongoose.Schema({
+  message: {
+    type:String,
     required: true,
   },
-  description: {
-    type: String,
+  plant: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Plant',
     required: true,
   },
-  user: {
+  assignedTo: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  tasks: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref:'Task',
-  }],
   createdAt: {
     type: Date,
     default: Date.now,
   },
 });
 
-const Project = mongoose.model('Project', ProjectSchema);
+const Comment = mongoose.model('Comment', CommentSchema);
 
-module.exports = Project;
+module.exports = Comment;
