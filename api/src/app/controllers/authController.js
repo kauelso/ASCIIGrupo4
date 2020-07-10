@@ -266,20 +266,4 @@ router.put('/reset_password', async(req, res) => {
   }
 });
 
-const authMiddleware = require('../middlewares/auth');
-router.use(authMiddleware);//as rotas abaixo estao protegidas por autenticacao
-
-router.get('/user/:id', async(req, res) => {
-  // console.log(req.params.id);
-  const user = await User.findById(req.params.id);
-  if(!user) 
-    return res.status(400).json({
-      error: true,
-      message:"erro: usuario nao encontrado"
-    });
-  return res.status(200).json({
-    user
-  });
-});
-
 module.exports = (app) => app.use('/api/auth', router);
