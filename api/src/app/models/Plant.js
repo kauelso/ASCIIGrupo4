@@ -9,6 +9,10 @@ const PlantSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  plantType:{
+    type: String,
+    required: true,
+  },
   description: {
     type: String,
     required: true,
