@@ -1,0 +1,47 @@
+<html>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&display=swap" rel="stylesheet"> 
+  <style>
+    * {
+      font-family: 'Comfortaa', Arial, Helvetica, sans-serif;
+      margin: 5px;
+      padding: 0;
+      outline: none;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    a {
+      text-decoration: none;
+      text-align: center;
+      background: #07d;
+      color: #fff;
+      margin: 10px;
+      padding: 5px;
+      border-radius: 8px;
+    }
+    p{
+      margin: 10px;
+    }
+    strong {
+      color: #07d;
+    }
+  </style>
+  <body>
+    <h1>Recuperação de senha Plantfolio Ascii</h1>
+    <p>Esqueceu sua senha?<br/>
+      clique no link a seguir para recuperar
+      o acesso a sua conta:<br/>
+    </p>
+    <a href="${resetURL}/${token}">
+      Criar nova senha
+    </a>
+    <p>Ou copie e cole no seu navegador:<br/>
+    <strong>${resetURL}/${token}</strong>
+    </p>
+  </body>
+</html>
