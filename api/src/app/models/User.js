@@ -24,11 +24,10 @@ const UserSchema = new mongoose.Schema({
   passwordResetExpires: {
     type:Date,
     select:false,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+  }
+},
+{
+  timestamps: true
 });
 
 UserSchema.pre('save', async function(next){

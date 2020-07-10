@@ -8,12 +8,12 @@ const Comment = require('../models/Comment');
 router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
-  try {    
-    const plants = await Plant.find({ assignedToUser: req.userId ,isArchived:false})
+  try {
+    const plants = await Plant.find({ assignedToUser: req.userId })
       .populate(['user', 'comments'])
       .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
-      //com 'createdAt' vem o mais antigo primeiro
-    return res.status(200).json({plants});
+    //com 'createdAt' vem o mais antigo primeiro
+    return res.status(200).json({ plants });
   } catch (err) {
     console.log(err);
     return res.status(400).json({
@@ -23,13 +23,13 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/favorites',async (req,res)=>{
-  try {    
-    const plants = await Plant.find({ assignedToUser: req.userId, isFavorite: true})
+router.get('/favorites', async (req, res) => {
+  try {
+    const plants = await Plant.find({ assignedToUser: req.userId, isFavorite: true })
       .populate(['user', 'comments'])
       .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
-      //com 'createdAt' vem o mais antigo primeiro
-    return res.status(200).json({plants});
+    //com 'createdAt' vem o mais antigo primeiro
+    return res.status(200).json({ plants });
   } catch (err) {
     console.log(err);
     return res.status(400).json({
@@ -75,11 +75,11 @@ router.get('/planttype',async (req,res)=>{
 router.get('/:plantId', async (req, res) => {
   try {
     const plant = await Plant.findById(req.params.plantId).populate(['user', 'comments']);
-    if(!plant) 
+    if (!plant)
       return res.status(400).json({
         error: "planta nao encontrada"
       });
-    return res.status(200).json({plant});
+    return res.status(200).json({ plant });
   } catch (err) {
     return res.status(400).json({
       error: 'nao foi possivel obter a planta'
@@ -87,31 +87,31 @@ router.get('/:plantId', async (req, res) => {
   }
 });
 
-
 router.post('/', async (req, res) => {
   // console.log(req.body);
-  const {scientificName, popularName, plantType,description,comments
+  const { scientificName, popularName, description, comments
   } = req.body;
-  try{
+  try {
     const plant = await Plant.create({
-      scientificName, assignedToUser: req.userId, description,plantType,
+      scientificName, assignedToUser: req.userId, description,
       popularName
     });
-    
+
     //aguardar tds promises do map concluirem
     // isso é para criar task q vamos usar para comentarios depois
-    // await Promise.all(comments.map(async comment => {
-    //   const plantComment = new Comment({...comment, plant: plant._id,
-    //     assignedTo: req.userId
-    //   });
-      
-    //   await plantComment.save()
-    //   plant.comments.push(plantComment);
-    // }));
+    await Promise.all(comments.map(async comment => {
+      const plantComment = new Comment({
+        ...comment, plant: plant._id,
+        assignedTo: req.userId
+      });
+
+      await plantComment.save()
+      plant.comments.push(plantComment);
+    }));
 
     await plant.save();
-    return res.json({plant});
-  }catch(err){
+    return res.json({ plant });
+  } catch (err) {
     console.log(err);
     return res.status(400).json({
       error: 'Erro ao criar nova planta',
@@ -149,21 +149,21 @@ router.put('/archive/:plantId', async (req, res) => {
 router.put('/favorite/:plantId', async (req, res) => {
   try {
     const plant = await Plant.findById(req.params.plantId);
-    
-    if(!plant)
+
+    if (!plant)
       return res.status(400).json({
-        error:"planta nao encontrada"
+        error: "planta nao encontrada"
       });
 
     console.log(plant.assignedToUser, req.userId)
-    if(plant.assignedToUser != req.userId)
+    if (plant.assignedToUser != req.userId)
       return res.status(401).json({
         error: "voce nao tem permissoes para isso"
       });
     plant.isFavorite = !plant.isFavorite;
 
     await plant.save();
-    return res.json({plant});
+    return res.json({ plant });
   } catch (err) {
     console.log(err);
     return res.status(400).json({
@@ -173,18 +173,18 @@ router.put('/favorite/:plantId', async (req, res) => {
 });
 
 router.put('/:plantId', async (req, res) => {
-  const {scientificName,popularName, description, comments} = req.body;
+  const { scientificName, popularName, description, comments } = req.body;
   try {
-    const plant = await Plant.findByIdAndUpdate(req.params.plantId, { 
+    const plant = await Plant.findByIdAndUpdate(req.params.plantId, {
       description,
       scientificName,
       popularName,
       assignedToUser: req.userId
     }, { new: true });
 
-    if(!plant)
+    if (!plant)
       return res.status(400).json({
-        error:"projeto nao encontrado"
+        error: "projeto nao encontrado"
       });
 
     //deletar os comments para n ocorrer reescrita
@@ -194,14 +194,14 @@ router.put('/:plantId', async (req, res) => {
     //aguardar tds promises do map concluirem
     await Promise.all(comments.map(async comment => {
       comment.assignedTo = req.userId;
-      const plantComment = new Comment({...comment, plant: plant._id});
-      
+      const plantComment = new Comment({ ...comment, plant: plant._id });
+
       await plantComment.save()
       plant.comments.push(plantComment);
     }));
 
     await plant.save();
-    return res.json({plant});
+    return res.json({ plant });
   } catch (err) {
     console.log(err);
     return res.status(400).json({
@@ -211,5 +211,37 @@ router.put('/:plantId', async (req, res) => {
 });
 
 
+
+router.put('/comment/:plantId', async (req, res) => {
+  try {
+    const { comment } = req.body;
+    const plant = await Plant.findById(req.params.plantId);
+
+    if (!plant)
+      return res.status(400).json({
+        error: "planta nao encontrada"
+      });
+
+    console.log(plant.assignedToUser, req.userId)
+    if (plant.assignedToUser != req.userId)
+      return res.status(401).json({
+        error: "voce nao tem permissoes para isso"
+      });
+
+    comment.assignedTo = req.userId;
+    const plantComment = new Comment({ ...comment, plant: plant._id });
+
+    await plantComment.save()
+    plant.comments.push(plantComment);
+
+    await plant.save();
+    return res.json({ plant });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: 'nao foi possivel favoritar a planta'
+    });
+  }
+});
 
 module.exports = app => app.use('/api/plants', router);
