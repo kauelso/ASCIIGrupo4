@@ -9,7 +9,7 @@ router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
   try {    
-    const plants = await Plant.find({ assignedToUser: req.userId})
+    const plants = await Plant.find({ assignedToUser: req.userId ,isArchived:false})
       .populate(['user', 'comments'])
       .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
       //com 'createdAt' vem o mais antigo primeiro
@@ -39,6 +39,39 @@ router.get('/favorites',async (req,res)=>{
   }
 });
 
+router.get('/archived',async (req,res)=>{
+  try {    
+    const plants = await Plant.find({ assignedToUser: req.userId, isArchived: true})
+      .populate(['user', 'comments'])
+      .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
+      //com 'createdAt' vem o mais antigo primeiro
+    return res.status(200).json({plants});
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: true,
+      message: 'nao foi possivel obter as plantas arquivadas'
+    });
+  }
+});
+
+router.get('/planttype',async (req,res)=>{
+  const type = req.body
+  try {
+    const plants = await Plant.find({ assignedToUser: req.userId , plantType: type.plantType})
+      .populate(['user', 'comments'])
+      .sort('-createdAt'); // sort com '-plantType' vem o mais recente primeiro
+      //com 'plantType' vem o mais antigo primeiro
+    return res.status(200).json({plants});
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: true,
+      message: 'nao foi possivel obter as plantas desse tipo'
+    });
+  }
+});
+
 router.get('/:plantId', async (req, res) => {
   try {
     const plant = await Plant.findById(req.params.plantId).populate(['user', 'comments']);
@@ -54,26 +87,27 @@ router.get('/:plantId', async (req, res) => {
   }
 });
 
+
 router.post('/', async (req, res) => {
   // console.log(req.body);
-  const {scientificName, popularName, description,comments
+  const {scientificName, popularName, plantType,description,comments
   } = req.body;
   try{
     const plant = await Plant.create({
-      scientificName, assignedToUser: req.userId, description,
+      scientificName, assignedToUser: req.userId, description,plantType,
       popularName
     });
     
     //aguardar tds promises do map concluirem
     // isso é para criar task q vamos usar para comentarios depois
-    await Promise.all(comments.map(async comment => {
-      const plantComment = new Comment({...comment, plant: plant._id,
-        assignedTo: req.userId
-      });
+    // await Promise.all(comments.map(async comment => {
+    //   const plantComment = new Comment({...comment, plant: plant._id,
+    //     assignedTo: req.userId
+    //   });
       
-      await plantComment.save()
-      plant.comments.push(plantComment);
-    }));
+    //   await plantComment.save()
+    //   plant.comments.push(plantComment);
+    // }));
 
     await plant.save();
     return res.json({plant});
@@ -81,6 +115,59 @@ router.post('/', async (req, res) => {
     console.log(err);
     return res.status(400).json({
       error: 'Erro ao criar nova planta',
+    });
+  }
+});
+
+router.put('/archive/:plantId', async (req, res) => {
+  try {
+    const plant = await Plant.findById(req.params.plantId);
+    console.log(req.params.plantId);
+    
+    if(!plant)
+      return res.status(400).json({
+        error:"planta nao encontrada"
+      });
+
+    console.log(plant.assignedToUser, req.userId)
+    if(plant.assignedToUser != req.userId)
+      return res.status(401).json({
+        error: "voce nao tem permissoes para isso"
+      });
+    plant.isArchived = !plant.isArchived;
+
+    await plant.save();
+    return res.json({plant});
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: 'nao foi possivel arquivar a planta'
+    });
+  }
+});
+
+router.put('/favorite/:plantId', async (req, res) => {
+  try {
+    const plant = await Plant.findById(req.params.plantId);
+    
+    if(!plant)
+      return res.status(400).json({
+        error:"planta nao encontrada"
+      });
+
+    console.log(plant.assignedToUser, req.userId)
+    if(plant.assignedToUser != req.userId)
+      return res.status(401).json({
+        error: "voce nao tem permissoes para isso"
+      });
+    plant.isFavorite = !plant.isFavorite;
+
+    await plant.save();
+    return res.json({plant});
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: 'nao foi possivel favoritar a planta'
     });
   }
 });
@@ -123,31 +210,6 @@ router.put('/:plantId', async (req, res) => {
   }
 });
 
-router.put('/favorite/:plantId', async (req, res) => {
-  try {
-    const plant = await Plant.findById(req.params.plantId);
-    
-    if(!plant)
-      return res.status(400).json({
-        error:"planta nao encontrada"
-      });
-
-    console.log(plant.assignedToUser, req.userId)
-    if(plant.assignedToUser != req.userId)
-      return res.status(401).json({
-        error: "voce nao tem permissoes para isso"
-      });
-    plant.isFavorite = !plant.isFavorite;
-
-    await plant.save();
-    return res.json({plant});
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json({
-      error: 'nao foi possivel favoritar a planta'
-    });
-  }
-});
 
 
 module.exports = app => app.use('/api/plants', router);
