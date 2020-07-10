@@ -16,7 +16,7 @@ const router = express.Router();
 
 function generateToken(params = {}){
   return jwt.sign(params , authSecret, {
-    expiresIn: 86400,
+    expiresIn: '3d',// expires in 3 days
   });
 }
 
@@ -194,7 +194,7 @@ router.post('/forgot_password',  async(req, res) => {
       <body>
         <h1>Recuperação de senha Plantfolio Ascii</h1>
         <p>Esqueceu sua senha?<br/>
-          clique no link a seguir para recuperar
+          clique no link a seguir nos proximos 15 minutos para recuperar
           o acesso a sua conta:<br/>
         </p>
         <a href="${resetURL}/${token}">
@@ -252,11 +252,12 @@ router.put('/reset_password', async(req, res) => {
         error: true,
         message:'token expirado'
       });  
+    user.passwordResetExpires = now;
     user.password = password;
     await user.save();
     return res.json({
       ok:true
-    })
+    });
   }catch(err){
     res.status(400).json({
       error: true,
@@ -264,6 +265,9 @@ router.put('/reset_password', async(req, res) => {
     });
   }
 });
+
+const authMiddleware = require('../middlewares/auth');
+router.use(authMiddleware);//as rotas abaixo estao protegidas por autenticacao
 
 router.get('/user/:id', async(req, res) => {
   // console.log(req.params.id);

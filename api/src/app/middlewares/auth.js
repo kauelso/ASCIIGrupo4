@@ -30,7 +30,7 @@ module.exports = (req, res, next) => {
     if(err) {
       return res.status(401).json({
         error:true,
-        message: 'token invalido'
+        message: 'token expirado'
       });
     }
 
