@@ -7,20 +7,25 @@ const Comment = require('../models/Comment');
 
 router.use(authMiddleware);
 
-router.get('/', async (req, res) => { // por intervalo de datas
+router.get('/', async (req, res) => { // listar por datas
   try {
     const {dateRange} =  req.query;
-    if(dateRange){
-      
+    if(!dateRange){  // listar por data em ordem crescente (+ recente primeiro)
+      const plants = await Plant.find({ assignedToUser: req.userId })
+        .populate(['user', 'comments'])
+        .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
+      //com 'createdAt' vem o mais antigo primeiro
+      return res.status(200).json({ plants });
     }
+    else { // listar por intervalo de datas
+      const {initialDate, finalDate} = req.body;
+      const plants = await Plant
+        .find({"createdAt":{ $gte:initialDate, $lt:finalDate }})
+        .populate(['user', 'comments'])
+        .sort('createdAt');  
 
-    const {initialDate, finalDate} = req.body;
-    const plants = await Plant
-      .find({"createdAt":{ $gte:initialDate, $lt:finalDate }})
-      .populate(['user', 'comments'])
-      .sort('createdAt');  
-
-    return res.status(200).json({ plants });
+      return res.status(200).json({ plants });
+    }
   } catch (err) {
     console.log(err);
     return res.status(400).json({
@@ -30,21 +35,6 @@ router.get('/', async (req, res) => { // por intervalo de datas
   }
 });
 
-router.get('/', async (req, res) => { // por datas em ordem de mais recente primeiro
-  try {
-    const plants = await Plant.find({ assignedToUser: req.userId })
-      .populate(['user', 'comments'])
-      .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
-    //com 'createdAt' vem o mais antigo primeiro
-    return res.status(200).json({ plants });
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json({
-      error: true,
-      message: 'nao foi possivel obter as plantas'
-    });
-  }
-});
 
 router.get('/favorites', async (req, res) => { // listar favoritas
   try {
