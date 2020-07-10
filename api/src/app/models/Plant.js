@@ -39,12 +39,8 @@ const PlantSchema = new mongoose.Schema({
   comments: [{
     type: mongoose.Schema.Types.ObjectId,
     ref:'Comment',
-  }],
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  }]
+}, { timestamps: true});
 
 const Plant = mongoose.model('Plant', PlantSchema);
 

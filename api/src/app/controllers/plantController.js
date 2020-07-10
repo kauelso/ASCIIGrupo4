@@ -7,7 +7,30 @@ const Comment = require('../models/Comment');
 
 router.use(authMiddleware);
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res) => { // por intervalo de datas
+  try {
+    const {dateRange} =  req.query;
+    if(dateRange){
+      
+    }
+
+    const {initialDate, finalDate} = req.body;
+    const plants = await Plant
+      .find({"createdAt":{ $gte:initialDate, $lt:finalDate }})
+      .populate(['user', 'comments'])
+      .sort('createdAt');  
+
+    return res.status(200).json({ plants });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: true,
+      message: 'nao foi possivel obter as plantas'
+    });
+  }
+});
+
+router.get('/', async (req, res) => { // por datas em ordem de mais recente primeiro
   try {
     const plants = await Plant.find({ assignedToUser: req.userId })
       .populate(['user', 'comments'])
@@ -23,7 +46,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/favorites', async (req, res) => {
+router.get('/favorites', async (req, res) => { // listar favoritas
   try {
     const plants = await Plant.find({ assignedToUser: req.userId, isFavorite: true })
       .populate(['user', 'comments'])
@@ -39,7 +62,7 @@ router.get('/favorites', async (req, res) => {
   }
 });
 
-router.get('/archived',async (req,res)=>{
+router.get('/archived',async (req,res)=>{ // listar arquivadas
   try {    
     const plants = await Plant.find({ assignedToUser: req.userId, isArchived: true})
       .populate(['user', 'comments'])
@@ -55,7 +78,7 @@ router.get('/archived',async (req,res)=>{
   }
 });
 
-router.get('/planttype',async (req,res)=>{
+router.get('/planttype',async (req,res)=>{ // listar por tipo
   const type = req.body
   try {
     const plants = await Plant.find({ assignedToUser: req.userId , plantType: type.plantType})
@@ -72,7 +95,7 @@ router.get('/planttype',async (req,res)=>{
   }
 });
 
-router.get('/:plantId', async (req, res) => {
+router.get('/:plantId', async (req, res) => { // listar planta por id
   try {
     const plant = await Plant.findById(req.params.plantId).populate(['user', 'comments']);
     if (!plant)
@@ -87,14 +110,15 @@ router.get('/:plantId', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res) => { // criar planta
   // console.log(req.body);
-  const { scientificName, popularName, description, comments
+  const { scientificName, popularName, description, 
+    comments, plantType
   } = req.body;
   try {
     const plant = await Plant.create({
       scientificName, assignedToUser: req.userId, description,
-      popularName
+      popularName, plantType
     });
 
     //aguardar tds promises do map concluirem
@@ -119,7 +143,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/archive/:plantId', async (req, res) => {
+router.put('/archive/:plantId', async (req, res) => { // (des)arquivar uma planta
   try {
     const plant = await Plant.findById(req.params.plantId);
     console.log(req.params.plantId);
@@ -146,7 +170,7 @@ router.put('/archive/:plantId', async (req, res) => {
   }
 });
 
-router.put('/favorite/:plantId', async (req, res) => {
+router.put('/favorite/:plantId', async (req, res) => { // (des)favoritar uma planta
   try {
     const plant = await Plant.findById(req.params.plantId);
 
@@ -172,7 +196,7 @@ router.put('/favorite/:plantId', async (req, res) => {
   }
 });
 
-router.put('/:plantId', async (req, res) => {
+router.put('/:plantId', async (req, res) => { // atualizar uma planta
   const { scientificName, popularName, description, comments } = req.body;
   try {
     const plant = await Plant.findByIdAndUpdate(req.params.plantId, {
@@ -184,7 +208,7 @@ router.put('/:plantId', async (req, res) => {
 
     if (!plant)
       return res.status(400).json({
-        error: "projeto nao encontrado"
+        error: "planta nao encontrada"
       });
 
     //deletar os comments para n ocorrer reescrita
@@ -205,14 +229,12 @@ router.put('/:plantId', async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(400).json({
-      error: 'nao foi possivel atualizar o projeto'
+      error: 'nao foi possivel atualizar a planta'
     });
   }
 });
 
-
-
-router.put('/comment/:plantId', async (req, res) => {
+router.put('/comment/:plantId', async (req, res) => { // add comentario a uma planta
   try {
     const { comment } = req.body;
     const plant = await Plant.findById(req.params.plantId);
