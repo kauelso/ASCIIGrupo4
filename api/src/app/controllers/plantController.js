@@ -55,14 +55,13 @@ router.get('/archived',async (req,res)=>{
   }
 });
 
-//ainda nao esta funcionando
 router.get('/planttype',async (req,res)=>{
-  const type = req.body;
+  const type = req.body
   try {
-    const plants = await Plant.find({ assignedToUser: req.userId})
+    const plants = await Plant.find({ assignedToUser: req.userId , plantType: type.plantType})
       .populate(['user', 'comments'])
-      .sort('-playerType'); // sort com '-createdAt' vem o mais recente primeiro
-      //com 'createdAt' vem o mais antigo primeiro
+      .sort('-createdAt'); // sort com '-plantType' vem o mais recente primeiro
+      //com 'plantType' vem o mais antigo primeiro
     return res.status(200).json({plants});
   } catch (err) {
     console.log(err);
