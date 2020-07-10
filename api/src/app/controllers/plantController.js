@@ -11,7 +11,9 @@ router.get('/', async (req, res) => { // listar por datas
   try {
     const {dateRange} =  req.query;
     if(!dateRange){  // listar por data em ordem crescente (+ recente primeiro)
-      const plants = await Plant.find({ assignedToUser: req.userId })
+      const plants = await Plant.find({ assignedToUser: req.userId,
+        isArchived: false
+      })
         .populate(['user', 'comments'])
         .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
       //com 'createdAt' vem o mais antigo primeiro
@@ -20,21 +22,20 @@ router.get('/', async (req, res) => { // listar por datas
     else { // listar por intervalo de datas
       const {initialDate, finalDate} = req.body;
       const plants = await Plant
-        .find({"createdAt":{ $gte:initialDate, $lt:finalDate }})
+        .find({"createdAt":{ $gte:initialDate, $lt:finalDate }, isArchived:false})
         .populate(['user', 'comments'])
         .sort('createdAt');  
 
       return res.status(200).json({ plants });
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).json({
       error: true,
       message: 'nao foi possivel obter as plantas'
     });
   }
 });
-
 
 router.get('/favorites', async (req, res) => { // listar favoritas
   try {
@@ -44,7 +45,7 @@ router.get('/favorites', async (req, res) => { // listar favoritas
     //com 'createdAt' vem o mais antigo primeiro
     return res.status(200).json({ plants });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).json({
       error: true,
       message: 'nao foi possivel obter as plantas favoritas'
@@ -60,7 +61,7 @@ router.get('/archived',async (req,res)=>{ // listar arquivadas
       //com 'createdAt' vem o mais antigo primeiro
     return res.status(200).json({plants});
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).json({
       error: true,
       message: 'nao foi possivel obter as plantas arquivadas'
@@ -71,13 +72,13 @@ router.get('/archived',async (req,res)=>{ // listar arquivadas
 router.get('/planttype',async (req,res)=>{ // listar por tipo
   const type = req.body
   try {
-    const plants = await Plant.find({ assignedToUser: req.userId , plantType: type.plantType})
+    const plants = await Plant.find({ assignedToUser: req.userId , plantType: type.plantType, isArchived: false})
       .populate(['user', 'comments'])
       .sort('-createdAt'); // sort com '-plantType' vem o mais recente primeiro
       //com 'plantType' vem o mais antigo primeiro
     return res.status(200).json({plants});
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).json({
       error: true,
       message: 'nao foi possivel obter as plantas desse tipo'
@@ -126,7 +127,7 @@ router.post('/', async (req, res) => { // criar planta
     await plant.save();
     return res.json({ plant });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).json({
       error: 'Erro ao criar nova planta',
     });
@@ -136,14 +137,14 @@ router.post('/', async (req, res) => { // criar planta
 router.put('/archive/:plantId', async (req, res) => { // (des)arquivar uma planta
   try {
     const plant = await Plant.findById(req.params.plantId);
-    console.log(req.params.plantId);
+    // console.log(req.params.plantId);
     
     if(!plant)
       return res.status(400).json({
         error:"planta nao encontrada"
       });
 
-    console.log(plant.assignedToUser, req.userId)
+    // console.log(plant.assignedToUser, req.userId)
     if(plant.assignedToUser != req.userId)
       return res.status(401).json({
         error: "voce nao tem permissoes para isso"
@@ -153,7 +154,7 @@ router.put('/archive/:plantId', async (req, res) => { // (des)arquivar uma plant
     await plant.save();
     return res.json({plant});
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).json({
       error: 'nao foi possivel arquivar a planta'
     });
@@ -169,7 +170,7 @@ router.put('/favorite/:plantId', async (req, res) => { // (des)favoritar uma pla
         error: "planta nao encontrada"
       });
 
-    console.log(plant.assignedToUser, req.userId)
+    // console.log(plant.assignedToUser, req.userId)
     if (plant.assignedToUser != req.userId)
       return res.status(401).json({
         error: "voce nao tem permissoes para isso"
@@ -179,7 +180,7 @@ router.put('/favorite/:plantId', async (req, res) => { // (des)favoritar uma pla
     await plant.save();
     return res.json({ plant });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).json({
       error: 'nao foi possivel favoritar a planta'
     });
@@ -217,7 +218,7 @@ router.put('/:plantId', async (req, res) => { // atualizar uma planta
     await plant.save();
     return res.json({ plant });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).json({
       error: 'nao foi possivel atualizar a planta'
     });
@@ -234,7 +235,7 @@ router.put('/comment/:plantId', async (req, res) => { // add comentario a uma pl
         error: "planta nao encontrada"
       });
 
-    console.log(plant.assignedToUser, req.userId)
+    // console.log(plant.assignedToUser, req.userId)
     if (plant.assignedToUser != req.userId)
       return res.status(401).json({
         error: "voce nao tem permissoes para isso"
@@ -249,7 +250,7 @@ router.put('/comment/:plantId', async (req, res) => { // add comentario a uma pl
     await plant.save();
     return res.json({ plant });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     return res.status(400).json({
       error: 'nao foi possivel favoritar a planta'
     });
