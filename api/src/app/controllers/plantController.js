@@ -55,6 +55,23 @@ router.get('/archived',async (req,res)=>{
   }
 });
 
+router.get('/planttype',async (req,res)=>{
+  const {plantType} = req.body;
+  try {
+    const plants = await Plant.find({ assignedToUser: req.userId , plantType: {plantType}})
+      .populate(['user', 'comments'])
+      .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
+      //com 'createdAt' vem o mais antigo primeiro
+    return res.status(200).json({plants});
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: true,
+      message: 'nao foi possivel obter as plantas desse tipo'
+    });
+  }
+});
+
 router.get('/:plantId', async (req, res) => {
   try {
     const plant = await Plant.findById(req.params.plantId).populate(['user', 'comments']);
@@ -70,22 +87,6 @@ router.get('/:plantId', async (req, res) => {
   }
 });
 
-router.get('/planttype',async (req,res)=>{
-  const {plantType} = req.body;
-  try {
-    const plants = await Plant.find({ assignedToUser: req.userId , plantType: {plantType}})
-      .populate(['user', 'comments'])
-      .sort('-createdAt'); // sort com '-createdAt' vem o mais recente primeiro
-      //com 'createdAt' vem o mais antigo primeiro
-    return res.status(200).json({plants});
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json({
-      error: true,
-      message: 'nao foi possivel obter as plantas arquivadas'
-    });
-  }
-});
 
 router.post('/', async (req, res) => {
   // console.log(req.body);
