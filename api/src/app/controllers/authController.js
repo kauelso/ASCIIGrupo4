@@ -53,7 +53,6 @@ router.post('/register', async (req, res) => {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          text-align: center;
         }
         a {
           text-decoration: none;
@@ -175,7 +174,6 @@ router.post('/forgot_password',  async(req, res) => {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          text-align: center;
         }
         a {
           text-decoration: none;
@@ -221,25 +219,6 @@ router.post('/forgot_password',  async(req, res) => {
         message: 'um token de recuperação de senha foi enviado ao email cadastrado na conta'
       });
     });
-
-    /*mailer.sendMail({
-      to:email,
-      from: 'developer.adiel@gmail.com',
-      template: 'auth/forgot_password',
-      context:{token},
-    },(err) => {
-      console.log(err);
-      if(err){
-        return res.status(400).json({
-          error: true,
-          token,
-          message: 'Nao foi possivel enviar o email de recuperacao de senha'
-        });
-        res.status(200).json({
-          ok:true
-        });
-      }
-    });*/
   }catch(err){
     // console.log(err);
     res.status(400).json({
@@ -284,6 +263,19 @@ router.put('/reset_password', async(req, res) => {
       message: "Nao foi possivel alterar a senha, tente novamente"
     });
   }
+});
+
+router.get('/user/:id', async(req, res) => {
+  // console.log(req.params.id);
+  const user = await User.findById(req.params.id);
+  if(!user) 
+    return res.status(400).json({
+      error: true,
+      message:"erro: usuario nao encontrado"
+    });
+  return res.status(200).json({
+    user
+  });
 });
 
 module.exports = (app) => app.use('/api/auth', router);
