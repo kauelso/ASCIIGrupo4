@@ -55,8 +55,9 @@ router.get('/archived',async (req,res)=>{
   }
 });
 
+//ainda nao esta funcionando
 router.get('/planttype',async (req,res)=>{
-  const {plantType} = req.body;
+  const type = req.body;
   try {
     const plants = await Plant.find({ assignedToUser: req.userId , plantType: {plantType}})
       .populate(['user', 'comments'])
@@ -90,7 +91,7 @@ router.get('/:plantId', async (req, res) => {
 
 router.post('/', async (req, res) => {
   // console.log(req.body);
-  const {scientificName, popularName, description,comments,plantType
+  const {scientificName, popularName, plantType,description,comments
   } = req.body;
   try{
     const plant = await Plant.create({
@@ -100,14 +101,14 @@ router.post('/', async (req, res) => {
     
     //aguardar tds promises do map concluirem
     // isso é para criar task q vamos usar para comentarios depois
-    await Promise.all(comments.map(async comment => {
-      const plantComment = new Comment({...comment, plant: plant._id,
-        assignedTo: req.userId
-      });
+    // await Promise.all(comments.map(async comment => {
+    //   const plantComment = new Comment({...comment, plant: plant._id,
+    //     assignedTo: req.userId
+    //   });
       
-      await plantComment.save()
-      plant.comments.push(plantComment);
-    }));
+    //   await plantComment.save()
+    //   plant.comments.push(plantComment);
+    // }));
 
     await plant.save();
     return res.json({plant});
@@ -204,7 +205,7 @@ router.put('/archive/:plantId', async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(400).json({
-      error: 'nao foi possivel favoritar a planta'
+      error: 'nao foi possivel arquivar a planta'
     });
   }
 });
