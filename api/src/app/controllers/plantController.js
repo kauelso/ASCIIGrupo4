@@ -161,6 +161,33 @@ router.put('/archive/:plantId', async (req, res) => { // (des)arquivar uma plant
   }
 });
 
+router.put('/aguar/:plantId', async (req, res) => { //Modifica a data do campo wateredAt
+  try {
+    const plant = await Plant.findById(req.params.plantId);
+    // console.log(req.params.plantId);
+    
+    if(!plant)
+      return res.status(400).json({
+        error:"planta nao encontrada"
+      });
+
+    // console.log(plant.assignedToUser, req.userId)
+    if(plant.assignedToUser != req.userId)
+      return res.status(401).json({
+        error: "voce nao tem permissoes para isso"
+      });
+    plant.wateredAt = Date.now;
+
+    await plant.save();
+    return res.json({plant});
+  } catch (err) {
+    // console.log(err);
+    return res.status(400).json({
+      error: 'nao foi possivel aguar a planta'
+    });
+  }
+});
+
 router.put('/favorite/:plantId', async (req, res) => { // (des)favoritar uma planta
   try {
     const plant = await Plant.findById(req.params.plantId);
