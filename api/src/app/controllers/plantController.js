@@ -170,6 +170,14 @@ router.put('/favorite/:plantId', async (req, res) => { // (des)favoritar uma pla
         error: "planta nao encontrada"
       });
 
+    //verificar se o usuario q esta tentando favoritar
+    // eh o proprietario da planta
+    if(plant.assignedToUser !== req.userId)
+    return res.status(401).json({
+      error: true,
+      message:"voce nao tem permissao para acessar esta informacao"
+    });
+
     // console.log(plant.assignedToUser, req.userId)
     if (plant.assignedToUser != req.userId)
       return res.status(401).json({
@@ -207,7 +215,7 @@ router.put('/:plantId', async (req, res) => { // atualizar uma planta
         error: true,
         message:"voce nao tem permissao para acessar esta informacao"
       });
-      
+
     //deletar os comments para n ocorrer reescrita
     plant.comments = [];
     await Comment.remove({ plant: plant._id });
