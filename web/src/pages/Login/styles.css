@@ -1,0 +1,21 @@
+.login-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-side {
+  text-align: center;
+}
+
+.login-side h1 {
+  color: #0d7;
+  font-size: 26px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.login-side img {
+  height: 100px;
+}
