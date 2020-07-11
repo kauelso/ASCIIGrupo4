@@ -1,5 +1,6 @@
 api/.env
 web/.env
+web/build/
 api/node_modules/
 web/node_modules/
 package-lock.json

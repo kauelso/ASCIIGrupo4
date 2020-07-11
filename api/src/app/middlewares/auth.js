@@ -6,31 +6,27 @@ module.exports = (req, res, next) => {
 
   //verificar se token foi informado
   if(!authHeader) return res.status(401).json({
-    error: true,
-    message: "token de autenticação nao informado"
+    error: "acesso negado"
   });
 
   // verificar se token esta no padrao aceito
   // Bearer afjahsfuoshfahofuauhfausfhauhufiahf
   const parts = authHeader.split(' ');
   if(!parts.length===2) return res.status(401).json({
-    error: true,
-    message: "token error"
+    error: "acesso negado"
   });
 
   const [scheme, token] = parts;
 
   // regex
   if(!/^Bearer$/i.test(scheme)) return res.status(401).json({
-    error: true,
-    message: "token mal estruturado"
+    error: "acesso negado"
   });
 
   jwt.verify(token, authSecret, (err, decoded) => {
     if(err) {
       return res.status(401).json({
-        error:true,
-        message: 'token expirado'
+        error: 'acesso negado'
       });
     }
 
