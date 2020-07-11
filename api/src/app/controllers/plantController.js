@@ -23,15 +23,15 @@ router.get('/', async (req, res) => { // listar por datas
       const {initialDate, finalDate} = req.body;
       const plants = await Plant
         .find({"createdAt":{ $gte:initialDate, $lt:finalDate }, isArchived:false,
-          assignedToUser: userId })
+          assignedToUser: req.userId })
         .populate(['user', 'comments'])
         .sort('createdAt');  
 
       return res.status(200).json({ plants });
     }
   } catch (err) {
-    // console.log(err);
-    return res.status(400).json({
+    console.log(err);
+    return res.status(401).json({
       error: true,
       message: 'nao foi possivel obter as plantas'
     });
@@ -47,7 +47,7 @@ router.get('/favorites', async (req, res) => { // listar favoritas
     return res.status(200).json({ plants });
   } catch (err) {
     // console.log(err);
-    return res.status(400).json({
+    return res.status(401).json({
       error: true,
       message: 'nao foi possivel obter as plantas favoritas'
     });
@@ -63,7 +63,7 @@ router.get('/archived',async (req,res)=>{ // listar arquivadas
     return res.status(200).json({plants});
   } catch (err) {
     // console.log(err);
-    return res.status(400).json({
+    return res.status(401).json({
       error: true,
       message: 'nao foi possivel obter as plantas arquivadas'
     });
@@ -80,7 +80,7 @@ router.get('/planttype',async (req,res)=>{ // listar por tipo
     return res.status(200).json({plants});
   } catch (err) {
     // console.log(err);
-    return res.status(400).json({
+    return res.status(401).json({
       error: true,
       message: 'nao foi possivel obter as plantas desse tipo'
     });
@@ -91,22 +91,21 @@ router.get('/:plantId', async (req, res) => { // listar planta por id
   try {
     const plant = await Plant.findById(req.params.plantId).populate(['user', 'comments']);
     if (!plant)
-      return res.status(400).json({
-        error: "planta nao encontrada"
+      return res.status(401).json({
+        error: "nao foi possivel listar esta planta"
       });
     
     //verificar se o usuario q esta tentando listar
     // eh o proprietario da planta
-    if(plant.assignedToUser != req.userId)
+    if(plant.assignedToUser.toString() !== req.userId.toString())
     return res.status(401).json({
-      error: true,
-      message:"voce nao tem permissao para acessar esta informacao"
+      error: "nao foi possivel listar esta planta"
     });
 
     return res.status(200).json({ plant });
   } catch (err) {
-    return res.status(400).json({
-      error: 'nao foi possivel obter a planta'
+    return res.status(401).json({
+      error: "nao foi possivel listar esta planta"
     });
   }
 });
@@ -138,7 +137,7 @@ router.post('/', async (req, res) => { // criar planta
     return res.json({ plant });
   } catch (err) {
     // console.log(err);
-    return res.status(400).json({
+    return res.status(401).json({
       error: 'Erro ao criar nova planta',
     });
   }
@@ -150,22 +149,21 @@ router.put('/archive/:plantId', async (req, res) => { // (des)arquivar uma plant
     // console.log(req.params.plantId);
     
     if(!plant)
-      return res.status(400).json({
-        error:"planta nao encontrada"
+      return res.status(401).json({
+        error: "nao foi possivel (des)arquivar esta planta"
       });
 
     //verificar se o usuario q esta tentando arquivar
     // eh o proprietario da planta
-    if(plant.assignedToUser != req.userId)
+    if(plant.assignedToUser.toString() !== req.userId.toString())
     return res.status(401).json({
-      error: true,
-      message:"voce nao tem permissao para acessar esta informacao"
+      error: "nao foi possivel (des)arquivar esta planta"
     });
 
     // console.log(plant.assignedToUser, req.userId)
     if(plant.assignedToUser != req.userId)
       return res.status(401).json({
-        error: "voce nao tem permissoes para isso"
+        error: "nao foi possivel (des)arquivar esta planta"
       });
     plant.isArchived = !plant.isArchived;
 
@@ -173,8 +171,8 @@ router.put('/archive/:plantId', async (req, res) => { // (des)arquivar uma plant
     return res.json({plant});
   } catch (err) {
     // console.log(err);
-    return res.status(400).json({
-      error: 'nao foi possivel arquivar a planta'
+    return res.status(401).json({
+      error: "nao foi possivel (des)arquivar esta planta"
     });
   }
 });
@@ -184,22 +182,21 @@ router.put('/favorite/:plantId', async (req, res) => { // (des)favoritar uma pla
     const plant = await Plant.findById(req.params.plantId);
 
     if (!plant)
-      return res.status(400).json({
-        error: "planta nao encontrada"
+      return res.status(401).json({
+        error: "nao foi possivel (des)favoritar esta planta"
       });
 
     //verificar se o usuario q esta tentando favoritar
     // eh o proprietario da planta
-    if(plant.assignedToUser != req.userId)
+    if(plant.assignedToUser.toString() !== req.userId.toString())
     return res.status(401).json({
-      error: true,
-      message:"voce nao tem permissao para acessar esta informacao"
+      error: "nao foi possivel (des)favoritar esta planta"
     });
 
     // console.log(plant.assignedToUser, req.userId)
     if (plant.assignedToUser != req.userId)
       return res.status(401).json({
-        error: "voce nao tem permissoes para isso"
+        error: "nao foi possivel (des)favoritar esta planta"
       });
     plant.isFavorite = !plant.isFavorite;
 
@@ -207,8 +204,8 @@ router.put('/favorite/:plantId', async (req, res) => { // (des)favoritar uma pla
     return res.json({ plant });
   } catch (err) {
     // console.log(err);
-    return res.status(400).json({
-      error: 'nao foi possivel favoritar a planta'
+    return res.status(401).json({
+      error: "nao foi possivel (des)favoritar esta planta"
     });
   }
 });
@@ -216,43 +213,31 @@ router.put('/favorite/:plantId', async (req, res) => { // (des)favoritar uma pla
 router.put('/:plantId', async (req, res) => { // atualizar uma planta
   const { scientificName, popularName, description, comments } = req.body;
   try {
-    const plant = await Plant.findByIdAndUpdate(req.params.plantId, {
-      description,
-      scientificName,
-      popularName,
-      assignedToUser: req.userId
-    }, { new: true });
+    const plant = await Plant.findById(req.params.plantId);
 
     if (!plant)
-      return res.status(400).json({
-        error: "planta nao encontrada"
-      });
-
-    if(plant.assignedToUser != req.userId)
       return res.status(401).json({
-        error: true,
-        message:"voce nao tem permissao para acessar esta informacao"
+        error: "nao foi possivel atualizar esta planta"
       });
 
-    //deletar os comments para n ocorrer reescrita
-    plant.comments = [];
-    await Comment.remove({ plant: plant._id });
+    //verificar se o usuario q esta tentando atualizar
+    // eh o proprietario da planta
+    if(plant.assignedToUser.toString() !== req.userId.toString())
+    return res.status(401).json({
+      error: "nao foi possivel atualizar esta planta"
+    });
 
-    //aguardar tds promises do map concluirem
-    await Promise.all(comments.map(async comment => {
-      comment.assignedTo = req.userId;
-      const plantComment = new Comment({ ...comment, plant: plant._id });
-
-      await plantComment.save()
-      plant.comments.push(plantComment);
-    }));
+    plant.scientificName = scientificName;
+    plant.description = description;
+    plant.popularName = popularName;
+    plant.assignedToUser = req.userId;
 
     await plant.save();
     return res.json({ plant });
   } catch (err) {
     // console.log(err);
-    return res.status(400).json({
-      error: 'nao foi possivel atualizar a planta'
+    return res.status(401).json({
+      error: "nao foi possivel atualizar esta planta"
     });
   }
 });
@@ -263,16 +248,15 @@ router.put('/comment/:plantId', async (req, res) => { // add comentario a uma pl
     const plant = await Plant.findById(req.params.plantId);
 
     if (!plant)
-      return res.status(400).json({
-        error: "planta nao encontrada"
+      return res.status(401).json({
+        error: "nao foi possivel comentar nesta planta"
       });
 
-    //verificar se o usuario q esta tentando comentar em uma planta
+    //verificar se o usuario q esta tentando comentar
     // eh o proprietario da planta
-    if(plant.assignedToUser != req.userId)
+    if(plant.assignedToUser.toString() !== req.userId.toString())
     return res.status(401).json({
-      error: true,
-      message:"voce nao tem permissao para acessar esta informacao"
+      error: "nao foi possivel comentar nesta planta"
     });
 
     comment.assignedTo = req.userId;
@@ -285,8 +269,8 @@ router.put('/comment/:plantId', async (req, res) => { // add comentario a uma pl
     return res.json({ plant });
   } catch (err) {
     // console.log(err);
-    return res.status(400).json({
-      error: 'nao foi possivel favoritar a planta'
+    return res.status(401).json({
+      error: "nao foi possivel comentar nesta planta"
     });
   }
 });

@@ -24,9 +24,8 @@ router.post('/register', async (req, res) => {
   const { email } = req.body;
   try{
     if( await User.findOne({email})){
-      return res.status(409).json({
-        error: true,
-        message: "Erro: email ja registrado em outra conta",
+      return res.status(401).json({
+        error: "falha ao registrar novo usuario"
       });
     }
 
@@ -86,8 +85,8 @@ router.post('/register', async (req, res) => {
     },(err) => {
       console.log(err);
       if(err)
-        return res.status(400).json({
-          error: 'não foi possivel enviar o email boas vindas'
+        return res.status(401).json({
+          error: "falha ao registrar novo usuario"
         });
     });
     return res.status(201).json({
@@ -96,9 +95,8 @@ router.post('/register', async (req, res) => {
     });
   }catch(err){
     console.log(err);
-    return res.status(400).json({
-      error: true,
-      message: 'erro ao criar novo usuario',
+    return res.status(401).json({
+      error: "falha ao registrar novo usuario"
     });
   }
 });
@@ -109,16 +107,14 @@ router.post('/authenticate', async (req, res) => {
   //tentar encontrar usuario que corresponda o email informado
   const user = await User.findOne({ email }).select('+password');
   if(!user){
-    return res.status(400).json({
-      error: true,
-      message: "usuario nao encontrado"
+    return res.status(401).json({
+      error: "falha na autenticacao"
     });
   }
 
   if(!await bcrypt.compare(password, user.password)){
-    return res.status(400).json({
-      error:true,
-      message: "senha invalida"
+    return res.status(401).json({
+      error: "falha na autenticacao"
     });
   }
 
@@ -138,9 +134,8 @@ router.post('/forgot_password',  async(req, res) => {
   try{
     const user = await User.findOne({ email });
     if(!user){
-      return res.status(400).json({
-        error: true,
-        message: "usuario nao encontrado"
+      return res.status(401).json({
+        error: "falha na recuperaçao de senha, tente novamente"
       });
     }
 
@@ -212,8 +207,8 @@ router.post('/forgot_password',  async(req, res) => {
     },(err) => {
       // console.log(err);
       if(err)
-        return res.status(400).json({
-          error: 'não foi possivel enviar o email de recuperacao de senha'
+        return res.status(401).json({
+          error: "falha na recuperaçao de senha, tente novamente"
         });
       return res.status(200).json({
         message: 'um token de recuperação de senha foi enviado ao email cadastrado na conta'
@@ -221,9 +216,8 @@ router.post('/forgot_password',  async(req, res) => {
     });
   }catch(err){
     // console.log(err);
-    res.status(400).json({
-      error: true,
-      message: "falha ao recuperar a senha, tente novamente"
+    res.status(401).json({
+      error: "falha na recuperaçao de senha, tente novamente"
     })
   }
 });
@@ -235,22 +229,19 @@ router.put('/reset_password', async(req, res) => {
       .select('+passwordResetToken passwordResetExpires');
 
     if(!user)
-      return res.status(400).json({
-        error:true,
-        message: 'Usuario nao encontrado'
+      return res.status(401).json({
+        error: "falha na alteração da senha, tente novamente"
       });  
     
     if(token !== user.passwordResetToken)
-      return res.status(400).json({
-        error:true,
-        message: 'token invalido'
+      return res.status(401).json({
+        error: "falha na alteração da senha, tente novamente"
       });
     
     const now = new Date();
     if(now > user.passwordResetExpires)
-      return res.status(400).json({
-        error: true,
-        message:'token expirado'
+      return res.status(401).json({
+        error: "falha na alteração da senha, tente novamente"
       });  
     user.passwordResetExpires = now;
     user.password = password;
@@ -259,9 +250,8 @@ router.put('/reset_password', async(req, res) => {
       ok:true
     });
   }catch(err){
-    res.status(400).json({
-      error: true,
-      message: "Nao foi possivel alterar a senha, tente novamente"
+    res.status(401).json({
+      error: "falha na alteração da senha, tente novamente"
     });
   }
 });

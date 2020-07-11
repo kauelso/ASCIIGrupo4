@@ -8,13 +8,12 @@ const User = require('../models/User');
 //variavel de ambiente
 const authSecret = process.env.AUTH_SECRET;
 
-router.get('/user', async(req, res) => {
+router.get('/user', async(req, res) => { // listar usuario
   // console.log(req.params.id);
   const user = await User.findById(req.userId);
   if(!user) 
-    return res.status(400).json({
-      error: true,
-      message:"erro: usuario nao encontrado"
+    return res.status(401).json({
+      error: "nao foi possivel listar o usuario"
     });
   
   return res.status(200).json({
@@ -22,12 +21,11 @@ router.get('/user', async(req, res) => {
   });
 });
 
-router.put('/user/:id', async(req, res) => {
+router.put('/user/:id', async(req, res) => { // atualizar usuario
   //verificar se o usuario esta tentando acessar dados de outro usuario
   if(req.params.id && req.params.id !== req.userId)
     return res.status(401).json({
-      error: true,
-      message: 'voce nao tem permissao para acessar essas informacoes'
+      error: "nao foi possivel atualizar esse usuario"
     });
 
   
@@ -36,9 +34,8 @@ router.put('/user/:id', async(req, res) => {
     const user = await User.findOne({ email });
 
     if(!user)
-      return res.status(400).json({
-        error:true,
-        message: 'Usuario nao encontrado'
+      return res.status(401).json({
+        error: "nao foi possivel atualizar esse usuario"
       });
 
     user.name = name;
@@ -48,9 +45,8 @@ router.put('/user/:id', async(req, res) => {
     });
   }catch(err){
     // console.log(err)
-    return res.status(400).json({
-      error: true,
-      message: 'erro ao atualizar dados do usuario'
+    return res.status(401).json({
+      error: "nao foi possivel atualizar esse usuario"
     });
   }
 });
