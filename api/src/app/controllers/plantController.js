@@ -22,7 +22,8 @@ router.get('/', async (req, res) => { // listar por datas
     else { // listar por intervalo de datas
       const {initialDate, finalDate} = req.body;
       const plants = await Plant
-        .find({"createdAt":{ $gte:initialDate, $lt:finalDate }, isArchived:false})
+        .find({"createdAt":{ $gte:initialDate, $lt:finalDate }, isArchived:false,
+          assignedToUser: userId })
         .populate(['user', 'comments'])
         .sort('createdAt');  
 
