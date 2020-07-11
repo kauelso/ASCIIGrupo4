@@ -93,6 +93,15 @@ router.get('/:plantId', async (req, res) => { // listar planta por id
       return res.status(400).json({
         error: "planta nao encontrada"
       });
+    
+    //verificar se o usuario q esta tentando listar
+    // eh o proprietario da planta
+    if(plant.assignedToUser !== req.userId)
+    return res.status(401).json({
+      error: true,
+      message:"voce nao tem permissao para acessar esta informacao"
+    });
+
     return res.status(200).json({ plant });
   } catch (err) {
     return res.status(400).json({
