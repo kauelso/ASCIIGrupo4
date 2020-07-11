@@ -144,6 +144,14 @@ router.put('/archive/:plantId', async (req, res) => { // (des)arquivar uma plant
         error:"planta nao encontrada"
       });
 
+    //verificar se o usuario q esta tentando arquivar
+    // eh o proprietario da planta
+    if(plant.assignedToUser !== req.userId)
+    return res.status(401).json({
+      error: true,
+      message:"voce nao tem permissao para acessar esta informacao"
+    });
+
     // console.log(plant.assignedToUser, req.userId)
     if(plant.assignedToUser != req.userId)
       return res.status(401).json({
