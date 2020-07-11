@@ -37,3 +37,9 @@ $ cd api
 $ yarn
 $ yarn dev
 ```
+ou se preferir execute
+```sh
+$ cd api
+$ npm install
+$ npm run dev
+```
