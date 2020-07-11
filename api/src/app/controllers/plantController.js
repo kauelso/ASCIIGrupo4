@@ -266,11 +266,13 @@ router.put('/comment/:plantId', async (req, res) => { // add comentario a uma pl
         error: "planta nao encontrada"
       });
 
-    // console.log(plant.assignedToUser, req.userId)
-    if (plant.assignedToUser != req.userId)
-      return res.status(401).json({
-        error: "voce nao tem permissoes para isso"
-      });
+    //verificar se o usuario q esta tentando comentar em uma planta
+    // eh o proprietario da planta
+    if(plant.assignedToUser !== req.userId)
+    return res.status(401).json({
+      error: true,
+      message:"voce nao tem permissao para acessar esta informacao"
+    });
 
     comment.assignedTo = req.userId;
     const plantComment = new Comment({ ...comment, plant: plant._id });
