@@ -96,7 +96,7 @@ router.get('/:plantId', async (req, res) => { // listar planta por id
     
     //verificar se o usuario q esta tentando listar
     // eh o proprietario da planta
-    if(plant.assignedToUser !== req.userId)
+    if(plant.assignedToUser != req.userId)
     return res.status(401).json({
       error: true,
       message:"voce nao tem permissao para acessar esta informacao"
@@ -155,7 +155,7 @@ router.put('/archive/:plantId', async (req, res) => { // (des)arquivar uma plant
 
     //verificar se o usuario q esta tentando arquivar
     // eh o proprietario da planta
-    if(plant.assignedToUser !== req.userId)
+    if(plant.assignedToUser != req.userId)
     return res.status(401).json({
       error: true,
       message:"voce nao tem permissao para acessar esta informacao"
@@ -189,7 +189,7 @@ router.put('/favorite/:plantId', async (req, res) => { // (des)favoritar uma pla
 
     //verificar se o usuario q esta tentando favoritar
     // eh o proprietario da planta
-    if(plant.assignedToUser !== req.userId)
+    if(plant.assignedToUser != req.userId)
     return res.status(401).json({
       error: true,
       message:"voce nao tem permissao para acessar esta informacao"
@@ -227,7 +227,7 @@ router.put('/:plantId', async (req, res) => { // atualizar uma planta
         error: "planta nao encontrada"
       });
 
-    if(plant.assignedToUser !== req.userId)
+    if(plant.assignedToUser != req.userId)
       return res.status(401).json({
         error: true,
         message:"voce nao tem permissao para acessar esta informacao"
@@ -268,7 +268,7 @@ router.put('/comment/:plantId', async (req, res) => { // add comentario a uma pl
 
     //verificar se o usuario q esta tentando comentar em uma planta
     // eh o proprietario da planta
-    if(plant.assignedToUser !== req.userId)
+    if(plant.assignedToUser != req.userId)
     return res.status(401).json({
       error: true,
       message:"voce nao tem permissao para acessar esta informacao"
