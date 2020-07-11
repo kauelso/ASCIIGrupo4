@@ -202,6 +202,12 @@ router.put('/:plantId', async (req, res) => { // atualizar uma planta
         error: "planta nao encontrada"
       });
 
+    if(plant.assignedToUser !== req.userId)
+      return res.status(401).json({
+        error: true,
+        message:"voce nao tem permissao para acessar esta informacao"
+      });
+      
     //deletar os comments para n ocorrer reescrita
     plant.comments = [];
     await Comment.remove({ plant: plant._id });
