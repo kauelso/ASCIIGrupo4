@@ -4,5 +4,3 @@ web/build/
 api/node_modules/
 web/node_modules/
 package-lock.json
-api/src/app/.env
-
