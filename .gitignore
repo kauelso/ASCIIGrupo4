@@ -1,10 +1,8 @@
-<<<<<<< HEAD
-src/.env
-.env
-node_modules/
+api/.env
+web/.env
+web/build/
+api/node_modules/
+web/node_modules/
 package-lock.json
 api/src/app/.env
-=======
-api/.env
-api/node_modules/
->>>>>>> adiel
+

@@ -1,14 +1,17 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 
 //variaveis ambiente
 const port = process.env.PORT || 3003;
+const frontURL = process.env.FRONT_ROOT_URL;
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cors({origin: 'http://localhost:3000'}));// em producao colocar  a frontURL
 
 require('./app/controllers/index')(app);
 
