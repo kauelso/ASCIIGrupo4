@@ -7,7 +7,7 @@ const Feedback =() => {
 
     return (
         <div>
-        <body>
+        <body id="feedback">
         <img src={logo} alt="Plantfolio Ascii"/>
         <h1>Plantfolio<br></br> Ascii</h1>
         <h2>Se o email informado<br></br>
