@@ -9,3 +9,13 @@
     padding-left: 35px;
     padding-bottom: 8px;
 }
+
+imput{
+    color: white;
+}
+
+.body{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
