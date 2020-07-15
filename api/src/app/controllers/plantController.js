@@ -75,7 +75,7 @@ router.get('/planttype',async (req,res)=>{ // listar por tipo
   try {
     const plants = await Plant.find({ assignedToUser: req.userId , plantType: type.plantType, isArchived: false})
       .populate(['user', 'comments'])
-      .sort('-createdAt'); // sort com '-plantType' vem o mais recente primeiro
+      .sort('-plantType'); // sort com '-plantType' vem o mais recente primeiro
       //com 'plantType' vem o mais antigo primeiro
     return res.status(200).json({plants});
   } catch (err) {
@@ -200,33 +200,6 @@ router.put('/aguar/:plantId', async (req, res) => { //Modifica a data do campo w
     console.log(err);
     return res.status(401).json({
       error: 'nao foi possivel aguar esta planta'
-    });
-  }
-});
-
-router.put('/aguar/:plantId', async (req, res) => { //Modifica a data do campo wateredAt
-  try {
-    const plant = await Plant.findById(req.params.plantId);
-    // console.log(req.params.plantId);
-    
-    if(!plant)
-      return res.status(400).json({
-        error:"planta nao encontrada"
-      });
-
-    // console.log(plant.assignedToUser, req.userId)
-    if(plant.assignedToUser != req.userId)
-      return res.status(401).json({
-        error: "voce nao tem permissoes para isso"
-      });
-    plant.wateredAt = Date.now;
-
-    await plant.save();
-    return res.json({plant});
-  } catch (err) {
-    // console.log(err);
-    return res.status(400).json({
-      error: 'nao foi possivel aguar a planta'
     });
   }
 });
