@@ -10,12 +10,15 @@
     padding-bottom: 8px;
 }
 
-imput{
-    color: white;
+input{
+    width: 100%;
 }
 
-.body{
+.nova-senha-container{
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+}
+.dados-senha{
+    display: block;
 }
