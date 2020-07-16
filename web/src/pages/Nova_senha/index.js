@@ -13,8 +13,8 @@ const Nova_senha =() =>{
             </div>
             <div className="dados-senha">
                 <h2>Crie uma nova <br></br>senha</h2>
-                <input type="password" placeholder="Nova Senha"></input>
-                <input type="password"  placeholder="Confirme a Nova Senha"></input>
+                <input className="input-nova-senha" type="password" placeholder="Nova Senha"></input>
+                <input className="input-nova-senha" type="password"  placeholder="Confirme a Nova Senha"></input>
             </div>
         </div>
         
