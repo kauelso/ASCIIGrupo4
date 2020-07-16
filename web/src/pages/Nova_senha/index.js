@@ -12,9 +12,10 @@ const Nova_senha =() =>{
             <h1>Plantfolio<br></br>Ascii</h1>
             </div>
             <div className="dados-senha">
-                <h2>Crie uma nova <br></br>senha</h2>
+                <h2>Crie uma nova senha</h2>
                 <input className="input-nova-senha" type="password" placeholder="Nova Senha"></input>
                 <input className="input-nova-senha" type="password"  placeholder="Confirme a Nova Senha"></input>
+                <button className="button-nova-senha" type="button">Alterar a senha</button>
             </div>
         </div>
         
