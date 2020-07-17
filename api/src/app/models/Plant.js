@@ -39,7 +39,11 @@ const PlantSchema = new mongoose.Schema({
   comments: [{
     type: mongoose.Schema.Types.ObjectId,
     ref:'Comment',
-  }]
+  }],
+  plantImage:{
+    type: String,
+    default: 'default.jpg'
+  }
 }, { timestamps: true});
 
 const Plant = mongoose.model('Plant', PlantSchema);
