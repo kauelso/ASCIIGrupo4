@@ -13,7 +13,9 @@ module.exports = {
             {
                 if(err) cb(err);
 
-                const  filename = `${hash.toString('hex')}-${file.originalname}`;
+                const filename = `${hash.toString('hex')}-${file.originalname}`;
+
+                cb(null,filename);
             })
         }
     }),
@@ -24,12 +26,12 @@ module.exports = {
         const allowedMimes = [
             'image/jpeg',
             'image/pjpeg',
-            'image.png'
+            'image/png'
         ];
         if(allowedMimes.includes(file.mimetype)){
             cb(null,true);
         }else{
-            cb(new error("Invalid type."));
+            cb(new Error("Invalid type."));
         }
     }
 }
