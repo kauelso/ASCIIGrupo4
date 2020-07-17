@@ -1,0 +1,34 @@
+.senha-side h1{
+    color:#00dd77
+}
+
+
+
+#icon-size{
+    height: 150px;
+    padding-left: 35px;
+    padding-bottom: 8px;
+}
+
+.button-nova-senha{
+    background-color: #0d7;
+    border-radius: 15px;
+    width: 100%;
+    height: 45px;
+}
+
+.input-nova-senha{
+    width: 100%;
+}
+
+.nova-senha-container{
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 30vh;
+}
+.dados-senha{
+    display: block;
+    line-height: 60px;
+}

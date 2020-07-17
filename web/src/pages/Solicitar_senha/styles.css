@@ -1,0 +1,19 @@
+.solicitar-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 30vh;
+
+}
+
+.dados-solicitar{
+    line-height: 60px;
+}
+
+.solicitar{
+   background-color: #0d7;
+   border-radius: 15px;
+   width: 450px;
+   height: 45px;
+  
+}
