@@ -8,7 +8,7 @@ import api from '../../services/api';
 
 const Register = () => {
   const history = useHistory();
-
+ 
   function handleRemoveClassRed(e) {
     document.getElementById('register-name').classList.remove('red');
     document.getElementById('register-email').classList.remove('red');
@@ -26,14 +26,16 @@ const Register = () => {
     if (name === "" || email === "" || password === "" || password2 === "") {
       return;
     }
+    //verificar se as senhas conferem
+    if(password.toString() !== password2.toString())
+      return;
 
     api.post('/api/auth/register', {
-      name, email, password, password2
+      name, email, password
     })
       .then(function (response) {
         //console.log(response.status)
         localStorage.setItem('sessionToken', response.data.token);
-        localStorage.setItem('sessionUserId', response.data.user._id);
         history.push('/');
       })
       .catch(function (err) {

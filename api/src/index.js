@@ -11,6 +11,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cors());
 //app.use(cors({origin: 'http://localhost:3000'}));
 // em producao colocar  a frontURL
 
