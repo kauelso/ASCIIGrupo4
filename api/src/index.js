@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const morgan = require("morgan");
 
 //variaveis ambiente
 const port = process.env.PORT || 3003;
@@ -12,6 +13,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors({origin: 'http://localhost:3000'}));// em producao colocar  a frontURL
+app.use(morgan('dev'));
+app.use('/uploads',express.static('./uploads'));
 
 require('./app/controllers/index')(app);
 
