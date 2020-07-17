@@ -23,6 +23,7 @@
 
 .register-side {
   text-align: center;
+  padding-bottom: 100px;
 }
 
 .register-side h1 {
@@ -33,5 +34,5 @@
 }
 
 .register-side img {
-  height: 100px;
+  height: 200px;
 }

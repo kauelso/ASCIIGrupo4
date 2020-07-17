@@ -8,7 +8,7 @@ import api from '../../services/api';
 
 const Register = () => {
   const history = useHistory();
- 
+
   function handleRemoveClassRed(e) {
     document.getElementById('register-name').classList.remove('red');
     document.getElementById('register-email').classList.remove('red');
@@ -27,7 +27,7 @@ const Register = () => {
       return;
     }
     //verificar se as senhas conferem
-    if(password.toString() !== password2.toString())
+    if (password.toString() !== password2.toString())
       return;
 
     api.post('/api/auth/register', {
@@ -49,7 +49,7 @@ const Register = () => {
 
   return (
     <div className="register-container">
-    <div className="register-side">
+      <div className="register-side">
         <img src={logo} alt="Plantfolio Ascii" />
         <h1>Plantfolio<br></br>Ascii</h1>
         <Link className="back-link" to="/login">
@@ -78,7 +78,7 @@ const Register = () => {
 
         </form>
       </div>
-  
+
     </div>
   );
 }
