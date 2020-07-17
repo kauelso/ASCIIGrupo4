@@ -75,7 +75,7 @@ router.get('/planttype',async (req,res)=>{ // listar por tipo
   try {
     const plants = await Plant.find({ assignedToUser: req.userId , plantType: type.plantType, isArchived: false})
       .populate(['user', 'comments'])
-      .sort('-createdAt'); // sort com '-plantType' vem o mais recente primeiro
+      .sort('-plantType'); // sort com '-plantType' vem o mais recente primeiro
       //com 'plantType' vem o mais antigo primeiro
     return res.status(200).json({plants});
   } catch (err) {

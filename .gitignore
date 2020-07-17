@@ -4,3 +4,9 @@ web/build/
 api/node_modules/
 web/node_modules/
 package-lock.json
+<<<<<<< HEAD
+=======
+api/src/app/.env
+api/src/.env
+
+>>>>>>> register
