@@ -1,55 +1,52 @@
-
 .nova-senha-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    height: max(100vh, 50%);
-  }
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: max(100vh, 50%);
+}
   
-  .dados-senha {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    height: max(100vh, 50%);
-  }
+.dados-senha {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: max(100vh, 50%);
+}
   
-  .dados-senha form input {
-   margin-top: 10px;
-  }
+.dados-senha form input {
+  margin-top: 10px;
+}
   
-  
-  
-  .dados-senha form {
-    display: flex;
-    max-width: 452px;
-    text-align: center;
-    }
-  
-  
-  .dados-senha .passwords {
-    display: flex;
-    justify-content: space-evenly;
-     
-  }
-  .dados-senha .passwords input {
-  
-    margin-left: 2.5px;
-    margin-right: 2.5px;
+.dados-senha form {
+  display: flex;
+  max-width: 452px;
+  text-align: center;
+}
     
-     
-  }
+.dados-senha .passwords {
+  display: flex;
+  justify-content: space-evenly; 
+}
+
+.dados-senha .passwords input {
+  margin-left: 2.5px;
+  margin-right: 2.5px;
+}
   
-  .senha-side {
-    text-align: center;
-  }
-  
-  .senha-side h1 {
-    color: #0d7;
-    font-size: 26px;
-    margin-top: 5px;
-    margin-bottom: 30px;
-  }
-  
-  .senha-side img {
-    height: 200px;
-  }
+.senha-side {
+  text-align: center;
+}
+
+.senha-side h1 {
+  color: #0d7;
+  font-size: 26px;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.text-error {
+    color: red;
+}
+
+.senha-side img {
+  height: 200px;
+}

@@ -53,50 +53,43 @@ const Register = () => {
 
   return (
     <Container fluid breakpoint="mobile">
-
-    <Column.Group multiline centered>
-
-
-  <Column size="half" breakpoint="mobile">
-  <div className="register-container">
-      <div className="register-side">
-        <img src={logo} alt="Plantfolio Ascii" />
-        <h1>Plantfolio<br></br>Ascii</h1>
-        <Link className="back-link" to="/login">
-          Faça Login
-            <FiLogIn size={16} color="#0d7" />
-        </Link>
-        </div>
-        </div>
-    
-  </Column>
-    <Column size="half" breakpoint="mobile">
-    <div className="register-rigth">
-        <form action="" onSubmit={handleSubmit}>
-          <input type="text" placeholder="Digite seu nome" id="register-name" onChange={
-            handleRemoveClassRed
-          } />
-          <input type="email" placeholder="Digite seu melhor e-mail" id="register-email" onChange={
-            handleRemoveClassRed
-          } />
-          <div className="passwords">
-            <input type="password" placeholder="Digite sua senha" id="register-password" onChange={
-              handleRemoveClassRed
-            } />
-            <input type="password" placeholder="Confirme sua senha" id="register-password2" onChange={
-              handleRemoveClassRed
-            } />
+      <Column.Group multiline centered>
+        <Column size="half" breakpoint="mobile">
+          <div className="register-container">
+            <div className="register-side">
+              <img src={logo} alt="Plantfolio Ascii" />
+              <h1>Plantfolio<br></br>Ascii</h1>
+              <Link className="back-link" to="/login">
+                Faça Login
+                  <FiLogIn size={16} color="#0d7" />
+              </Link>
+            </div>
           </div>
+        </Column>
 
-          <input type="submit" value="Registrar" className="input-btn" onClick={handleSubmit} />
-
-        </form>
-      </div>
-  </Column>
-</Column.Group>
-
-</Container>
-    
+        <Column size="half" breakpoint="mobile">
+          <div className="register-rigth">
+            <form action="" onSubmit={handleSubmit}>
+              <input required type="text" placeholder="Digite seu nome" id="register-name" onChange={
+                handleRemoveClassRed
+              } />
+              <input required type="email" placeholder="Digite seu melhor e-mail" id="register-email" onChange={
+                handleRemoveClassRed
+              } />
+              <div className="passwords">
+                <input required type="password" placeholder="Digite sua senha" id="register-password" onChange={
+                  handleRemoveClassRed
+                } />
+                <input required type="password" placeholder="Confirme sua senha" id="register-password2" onChange={
+                  handleRemoveClassRed
+                } />
+              </div>
+              <input required type="submit" value="Registrar" className="input-btn" onClick={handleSubmit} />
+            </form>
+          </div>
+        </Column>
+      </Column.Group>
+  </Container>
   );
 }
 
