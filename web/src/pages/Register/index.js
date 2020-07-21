@@ -59,22 +59,22 @@ const Register = () => {
       </div>
       <div className="register-rigth">
         <form action="" onSubmit={handleSubmit}>
-          <input type="text" placeholder="Digite seu nome" id="register-name" onChange={
+          <input required type="text" placeholder="Digite seu nome" id="register-name" onChange={
             handleRemoveClassRed
           } />
-          <input type="email" placeholder="Digite seu melhor e-mail" id="register-email" onChange={
+          <input required type="email" placeholder="Digite seu melhor e-mail" id="register-email" onChange={
             handleRemoveClassRed
           } />
           <div className="passwords">
-            <input type="password" placeholder="Digite sua senha" id="register-password" onChange={
+            <input required type="password" placeholder="Digite sua senha" id="register-password" onChange={
               handleRemoveClassRed
             } />
-            <input type="password" placeholder="Confirme sua senha" id="register-password2" onChange={
+            <input required type="password" placeholder="Confirme sua senha" id="register-password2" onChange={
               handleRemoveClassRed
             } />
           </div>
 
-          <input type="submit" value="Registrar" className="input-btn" onClick={handleSubmit} />
+          <input required type="submit" value="Registrar" className="input-btn" onClick={handleSubmit} />
 
         </form>
       </div>

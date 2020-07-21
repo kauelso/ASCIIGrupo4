@@ -29,6 +29,7 @@ const Login = () => {
       .then(function (response) {
         //console.log(response.status)
         localStorage.setItem('sessionToken', response.data.token);
+        window.history.replaceState(null, null, "/");
         history.push('/');
       })
       .catch(function (err) {

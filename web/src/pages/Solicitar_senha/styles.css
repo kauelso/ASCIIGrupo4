@@ -33,3 +33,7 @@
 .solicitar-container img {
     height: 200px;
 }
+
+.hidden {
+    display: none;
+}
