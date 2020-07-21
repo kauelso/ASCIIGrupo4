@@ -1,35 +1,55 @@
+
 .solicitar-container {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    min-height: 100vh;
-}
-
-.solicitar-container form {
+    height: max(100vh, 50%);
+  }
+  
+  .dados-solicitar {
     display: flex;
-    max-width: 460px;
-}
-
-.dados-solicitar form {
-    display: flex;
+    justify-content: space-evenly;
     align-items: center;
-}
-.dados-solicitar input {
-    margin-top: 15px;
-   
-}
-
-.solicitar-side {
+    height: max(100vh, 50%);
+  }
+  
+  .dados-solicitar form input {
+   margin-top: 10px;
+  }
+  
+  
+  
+  .dados-solicitar form {
+    display: flex;
+    max-width: 452px;
     text-align: center;
-}
-
-.solicitar-side h1 {
+    }
+  
+  
+  .dados-solicitar .passwords {
+    display: flex;
+    justify-content: space-evenly;
+     
+  }
+  .dados-solicitar .passwords input {
+  
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+    
+     
+  }
+  
+  .solicitar-side {
+    text-align: center;
+  }
+  
+  .solicitar-side h1 {
     color: #0d7;
     font-size: 26px;
     margin-top: 5px;
     margin-bottom: 30px;
-}
-
-.solicitar-container img {
+  }
+  
+  .solicitar-side img {
     height: 200px;
-}
+  }

@@ -1,18 +1,29 @@
+body{
+    font-family: 'Comfortaa', 'Roboto', Arial, Helvetica, sans-serif;
+    color: #fff;
+
+}
+
 #feedback{
     text-align: center;
     
 }
 img{
-    padding-top: 13vh;
+    padding-top: 17vh;
 }
 
 h2{
     padding-top: 60px;
     font-weight: 100;
+    font-size: 22px;
 }
 
 h1{
     color: #00dd77;
+    font-size: 25px;
+    font-weight: bold;
+
+
 }
 
 p{

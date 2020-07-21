@@ -6,6 +6,10 @@ import './styles.css';
 import logo from '../../assets/logo.svg';
 import api from '../../services/api';
 
+import "rbx/index.css";
+import {Container, Column} from 'rbx';
+
+
 const Register = () => {
   const history = useHistory();
 
@@ -48,7 +52,13 @@ const Register = () => {
   }
 
   return (
-    <div className="register-container">
+    <Container fluid breakpoint="mobile">
+
+    <Column.Group multiline centered>
+
+
+  <Column size="half" breakpoint="mobile">
+  <div className="register-container">
       <div className="register-side">
         <img src={logo} alt="Plantfolio Ascii" />
         <h1>Plantfolio<br></br>Ascii</h1>
@@ -56,8 +66,12 @@ const Register = () => {
           Faça Login
             <FiLogIn size={16} color="#0d7" />
         </Link>
-      </div>
-      <div className="register-rigth">
+        </div>
+        </div>
+    
+  </Column>
+    <Column size="half" breakpoint="mobile">
+    <div className="register-rigth">
         <form action="" onSubmit={handleSubmit}>
           <input type="text" placeholder="Digite seu nome" id="register-name" onChange={
             handleRemoveClassRed
@@ -78,8 +92,11 @@ const Register = () => {
 
         </form>
       </div>
+  </Column>
+</Column.Group>
 
-    </div>
+</Container>
+    
   );
 }
 
