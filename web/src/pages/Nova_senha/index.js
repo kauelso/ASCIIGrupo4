@@ -6,6 +6,9 @@ import logo from '../../assets/logo.svg';
 import api from '../../services/api';
 import Loading from '../../components/Loading';
 
+import "rbx/index.css";
+import { Container, Column } from 'rbx';
+
 const Nova_senha =(props) =>{
     const history = useHistory();
     function handleSubmit(event){
@@ -45,26 +48,36 @@ const Nova_senha =(props) =>{
             history.push('#');
         });
     }
-    return(
-        <div className="nova-senha-container">
-            <div className="senha-side">
-            <img id="icon-size" src={logo} alt="Plantfolio Ascii"/>
-            <h1>Plantfolio<br></br>Ascii</h1>
-            </div>
-            <div className="dados-senha">
-                <form action="" onSubmit={handleSubmit}>
-                    <h2>Crie uma nova senha</h2>
-                    <input id="passwd1" className="input-nova-senha" type="password" placeholder="Nova Senha"></input>
-                    <input id="passwd2" className="input-nova-senha" type="password"  placeholder="Confirme a Nova Senha"></input>
-                    <input type="submit" value="Confirmar" className="input-btn" onClick={handleSubmit}/>
-                    <Loading/>
-                </form>
-                <p className="text-error hidden" id="feedback-text">Verifique se as senhas conferem e possuem<br/>pelo menos 6 caracteres</p>
-           </div>
-        </div>
-        
+    
+    return (
+        <Container fluid breakpoint="mobile">
+            <Column.Group multiline centered>
+                <Column size="half" breakpoint="mobile">
+                    <div className="nova-senha-container">
+                        <div className="senha-side">
+                            <img id="icon-size" src={logo} alt="Plantfolio Ascii" />
+                            <h1>Plantfolio<br></br>Ascii</h1>
+                        </div>
+                    </div>
+                </Column>
+
+                <Column size="half" breakpoint="mobile">
+                    <div className="dados-senha">
+                        <form action="" onSubmit={handleSubmit}>
+                            <h2>Crie uma nova senha</h2>
+                            <input className="input-nova-senha" id="passwd1" type="password" placeholder="Nova Senha"></input>
+                            <input className="input-nova-senha" id="passwd2" type="password" placeholder="Confirme a Nova Senha"></input>
+                            <input type="submit" value="Confirmar" className="input-btn"  onClick={handleSubmit}/>
+                            <Loading/>
+                            <p id="feedback-text" className="text-error hidden" >Falha na alteração da senha,<br/>
+                            verifique se as senhas conferem e<br/> 
+                            contem pelo menos 6 caracteres</p>
+                        </form>
+                    </div>
+                </Column>
+
+            </Column.Group>
+        </Container>        
     );
-
-
 }
 export default Nova_senha;

@@ -6,6 +6,10 @@ import './styles.css';
 import logo from '../../assets/logo.svg';
 import api from '../../services/api';
 
+import "rbx/index.css";
+import {Container, Column} from 'rbx';
+
+
 const Login = () => {
   const history = useHistory();
     
@@ -40,8 +44,27 @@ const Login = () => {
   }
 
   return (
-    <div className="login-container">
-      <form action="" onSubmit={handleSubmit}>
+    <Container fluid breakpoint="mobile">
+
+    <Column.Group multiline centered>
+
+
+  <Column size="half" breakpoint="mobile">
+  <div className="login-side">
+    <div>
+        <img src={logo} alt="Plantfolio Ascii" />
+        <h1>Plantfolio<br></br>Ascii</h1>
+        <Link className="back-link" to="/register">
+          Cadastrar-se
+            <FiLogIn size={16} color="#0d7" />
+        </Link>
+        </div>
+      </div>
+    
+  </Column>
+    <Column size="half" breakpoint="mobile">
+    <div className="login-left">
+  <form action="" onSubmit={handleSubmit}>
         <input type="email" placeholder="E-mail" id="login-email" onChange={
           handleRemoveClassRed
         } />
@@ -53,15 +76,15 @@ const Login = () => {
           Esqueceu a senha?
         </Link>
       </form>
-      <div className="login-side">
-        <img src={logo} alt="Plantfolio Ascii" />
-        <h1>Plantfolio<br></br>Ascii</h1>
-        <Link className="back-link" to="/register">
-          Cadastrar-se
-            <FiLogIn size={16} color="#0d7" />
-        </Link>
       </div>
-    </div>
+  </Column>
+</Column.Group>
+
+</Container>
+
+
+      
+     
   );
 }
 

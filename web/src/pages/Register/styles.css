@@ -2,30 +2,43 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  min-height: 100vh;
+  height: max(100vh, 50%);
 }
 
-.register-container form {
+.register-rigth {
   display: flex;
   max-width: 480px;
+  justify-content: space-evenly;
+  align-items: center;
+  height: max(100vh, 50%);
+}
+
+.register-rigth form input {
+ margin-top: 10px;
+}
+
+.register-rigth form {
+  display: flex;
+  max-width: 452px;
 }
 
 .register-container form > input {
   width: 100%;
 }
 
-.register-container .passwords {
+.register-rigth .passwords {
   display: flex;
   justify-content: space-between;
    
 }
-.register-container .passwords input {
-  width: 49%;
+
+.register-rigth .passwords input {
+  margin-left: 2.5px;
+  margin-right: 2.5px;
 }
 
 .register-side {
   text-align: center;
-  padding-bottom: 100px;
 }
 
 .register-side h1 {

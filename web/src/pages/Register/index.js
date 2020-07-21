@@ -6,6 +6,10 @@ import './styles.css';
 import logo from '../../assets/logo.svg';
 import api from '../../services/api';
 
+import "rbx/index.css";
+import {Container, Column} from 'rbx';
+
+
 const Register = () => {
   const history = useHistory();
 
@@ -48,38 +52,44 @@ const Register = () => {
   }
 
   return (
-    <div className="register-container">
-      <div className="register-side">
-        <img src={logo} alt="Plantfolio Ascii" />
-        <h1>Plantfolio<br></br>Ascii</h1>
-        <Link className="back-link" to="/login">
-          Faça Login
-            <FiLogIn size={16} color="#0d7" />
-        </Link>
-      </div>
-      <div className="register-rigth">
-        <form action="" onSubmit={handleSubmit}>
-          <input required type="text" placeholder="Digite seu nome" id="register-name" onChange={
-            handleRemoveClassRed
-          } />
-          <input required type="email" placeholder="Digite seu melhor e-mail" id="register-email" onChange={
-            handleRemoveClassRed
-          } />
-          <div className="passwords">
-            <input required type="password" placeholder="Digite sua senha" id="register-password" onChange={
-              handleRemoveClassRed
-            } />
-            <input required type="password" placeholder="Confirme sua senha" id="register-password2" onChange={
-              handleRemoveClassRed
-            } />
+    <Container fluid breakpoint="mobile">
+      <Column.Group multiline centered>
+        <Column size="half" breakpoint="mobile">
+          <div className="register-container">
+            <div className="register-side">
+              <img src={logo} alt="Plantfolio Ascii" />
+              <h1>Plantfolio<br></br>Ascii</h1>
+              <Link className="back-link" to="/login">
+                Faça Login
+                  <FiLogIn size={16} color="#0d7" />
+              </Link>
+            </div>
           </div>
+        </Column>
 
-          <input required type="submit" value="Registrar" className="input-btn" onClick={handleSubmit} />
-
-        </form>
-      </div>
-
-    </div>
+        <Column size="half" breakpoint="mobile">
+          <div className="register-rigth">
+            <form action="" onSubmit={handleSubmit}>
+              <input required type="text" placeholder="Digite seu nome" id="register-name" onChange={
+                handleRemoveClassRed
+              } />
+              <input required type="email" placeholder="Digite seu melhor e-mail" id="register-email" onChange={
+                handleRemoveClassRed
+              } />
+              <div className="passwords">
+                <input required type="password" placeholder="Digite sua senha" id="register-password" onChange={
+                  handleRemoveClassRed
+                } />
+                <input required type="password" placeholder="Confirme sua senha" id="register-password2" onChange={
+                  handleRemoveClassRed
+                } />
+              </div>
+              <input required type="submit" value="Registrar" className="input-btn" onClick={handleSubmit} />
+            </form>
+          </div>
+        </Column>
+      </Column.Group>
+  </Container>
   );
 }
 
