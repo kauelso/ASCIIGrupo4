@@ -1,3 +1,13 @@
+div {
+    background-color: #131418;
+}
+div .menu1{
+    background-color: #323438;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    padding: 15px;
+    border: 0px solid #32343881;}
+
 header {
     display: flex;
     padding: 0;
@@ -20,4 +30,121 @@ div#imagem {
     margin-top: -50px;
     margin-left: 20px;
     margin-right: 10px;
+}
+
+div#topo {
+    background-color: #131418;
+    border-radius: 20px;
+    margin: 0;
+    padding: 0;
+    border: 0px solid #32343881;
+}
+div .menu {
+    background-color: #323438;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    padding: 15px;
+    border: 0px solid #32343881;
+}
+div .menu {
+    background-color: #32343800;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    padding: 15px;
+    border: 0px solid #32343881;
+}
+
+div .menu:hover {
+    background-color: #32343881;
+    
+}
+div#topo p {
+    color: white;
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+}
+
+div#baixo {
+    background-color: #32343881;
+    color: white;
+    font-size: 25px;
+    margin-top: -15px;
+    border: 0px solid #ffffffca;
+}
+
+div#baixo .mt-2 {
+    background-color: #32343881;
+    margin: 0;
+    padding: 10px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    background-color: #32343881;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+}
+
+form input {
+    margin: 4px;
+    text-align: center;
+}
+
+form input#nomeG {
+    margin: 4px;
+    text-align: center;
+    margin-top: 40px;
+}
+form input#date {
+    text-align: center;
+    padding: 4px;
+    max-width: 160px;
+}
+form input#botão-planta {
+    text-align: center;
+    color: white;
+    max-width: 460px;
+    font-size: 18px;
+    background-color: #4cff8bbe;
+
+}
+form input#botão-planta:hover {
+    background-color: #4CFF8C;
+}
+form label {
+    text-align: center;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea {
+    background-color: #32343881;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    border: 0px solid #32343881;
+    border-radius: 10px;
+    width: 450px;
+    height: 50px;
+}
+
+button {
+    background-color: #787a7e81;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 0px solid #32343881;
+    border-radius: 10px;
+    max-width: 250px;
+
+}
+
+button:hover {
+    background-color: #2f303381;
 }
