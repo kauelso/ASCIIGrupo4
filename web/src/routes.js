@@ -20,6 +20,7 @@ export default function Routes(){
                 <Route path="/forgot-password" component={Esqueci_senha} />
                 <Route path="/new-password" component={Nova_senha} />
                 <Route path="/solicitar_senha" component={Solicitar_senha} />
+                <Route path="/home" component={Home} />
             </Switch>
         </BrowserRouter>
     )
