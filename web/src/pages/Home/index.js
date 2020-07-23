@@ -82,10 +82,10 @@ class Home extends Component {
                     <tr>
                       <th className="tg-var1" rowspan="2">foto panta</th>
                       <th className="tg-var2" colspan="2">nome planta</th>
-                      <th className="tg-var2" rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th className="tg-var2" rowspan="2"></th>
                       <th className="tg-var3" rowspan="2">icone regador</th>
                       <th className="tg-var3" rowspan="2">ultima regada</th>
-                      <th className="tg-var2" rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th className="tg-var2" rowspan="2"></th>
                       <th className="tg-var2">arquivar</th>
                       <th className="tg-var2">favoritar</th>
                     </tr>
