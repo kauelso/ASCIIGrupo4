@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import api from "../../services/api";
 api.defaults.headers.common['Authorization'] = 
@@ -6,28 +6,37 @@ api.defaults.headers.common['Authorization'] =
 
 const NewPlant = () => {
   const history = useHistory();
+  const [sucesso, setSucesso] = useState(false);
 
   function handleSubmit(event) {
     event.preventDefault();
     console.log('handleSubmit new Plant');
-    let scientificName = document.getElementById('nomeCientifico').value;
-    let popularName = document.getElementById('nomeGenerico').value;
-    let description = document.getElementById('msg').value;
-    let plantType = document.getElementById('tipoPlanta').value;
+    let scientificName = document.getElementById('nomeCientifico');
+    let popularName = document.getElementById('nomeGenerico');
+    let description = document.getElementById('msg');
+    let plantType = document.getElementById('tipoPlanta');
 
-    if(popularName.toString() === '' || description.toString() === ''
-      || plantType.toString() === ''){
+    if(popularName.value.toString() === '' || description.value.toString() === ''
+      || plantType.value.toString() === ''){
+      
+      let plantError = document.getElementById('plantError');
+      scientificName.value = "";
+      popularName.value = "";
+      description.value = "";
+      plantType.value = "";
+      plantError.classList.remove('hidden');
       return;
     }
     
-    console.log(scientificName, popularName, description, plantType);
+    // console.log(scientificName, popularName, description, plantType);
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer '+ localStorage.getItem('sessionToken')
     }
 
     const data = {
-      scientificName, popularName, description, comments: [], plantType
+      scientificName: scientificName.value, popularName: popularName.value,
+      description: description.value, comments: [], plantType: plantType.value
     }
 
     api.post('/api/plants', data, {headers: headers
@@ -38,9 +47,18 @@ const NewPlant = () => {
       }
       // planta criada
       console.log(response);
-      history.push('/');
+      setSucesso(true);
+      let plantError = document.getElementById('plantError');
+      scientificName.value = "";
+      popularName.value = "";
+      description.value = "";
+      plantType.value = "";
+      plantError.classList.add('hidden');
     }).catch(function (err){
-      console.log(err);
+      // console.log(err);
+      setSucesso(false);
+      let plantError = document.getElementById('plantError');
+      plantError.classList.remove('hidden');
     });
   }
 
@@ -57,6 +75,7 @@ const NewPlant = () => {
         <label for="msg">Adicione uma descrição</label>
         <textarea id="msg" placeholder="Descrição da planta"></textarea>
         <button type="button">Adicionar Imagem</button>
+        <p id="plantError"  className="hidden">Não foi possível criar a planta, tente novamente!</p>
         <input type="submit" value="Registrar Planta" 
           className="botão-submit" id="botão-planta" onClick={handleSubmit} 
         />
