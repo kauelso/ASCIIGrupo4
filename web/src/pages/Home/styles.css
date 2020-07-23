@@ -239,7 +239,7 @@ button:hover {
 }
 .tg .tg-var2{
     border-color:initial;
-    text-align:left;
+    text-align:center;
     vertical-align:top
 }
 @media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}

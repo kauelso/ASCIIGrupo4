@@ -4,6 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 
 
 import React, { Component } from "react";
+import { AiFillHeart } from "react-icons/ai";
 import { MDBContainer, MDBRow, MDBCol, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
 import { Container } from 'rbx';
 
@@ -77,6 +78,7 @@ class Home extends Component {
             >
               <MDBTabPane tabId="1" role="tabpanel">
               <div class="tg-wrap">
+                
                 <table class="tg">
                   <thead>
                     <tr>
@@ -87,13 +89,13 @@ class Home extends Component {
                       <th className="tg-var3" rowspan="2">ultima regada</th>
                       <th className="tg-var2" rowspan="2"></th>
                       <th className="tg-var2">arquivar</th>
-                      <th className="tg-var2">favoritar</th>
+                      <th className="tg-var2"> Favoritar</th>
                     </tr>
                     <tr>
                       <td className="tg-var2">tipo planta</td>
                       <td className="tg-var2">data adesao</td>
                       <td className="tg-var2">"arquivar"</td>
-                      <td className="tg-var2">"favoritar"</td>
+                      <td className="tg-var2"><AiFillHeart/></td>
                     </tr>
                   </thead>
                 </table>
@@ -173,6 +175,7 @@ class Home extends Component {
 }
 
 export default Home;
+
 
 
 
