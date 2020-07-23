@@ -130,7 +130,7 @@ class Home extends Component {
 
 
 
-                    <input type="submit" value="Registrar Planta" className="botão-submit" id="botão-planta" />
+                    <input type="submit" value="Alterar Dados" className="botão-submit" id="botão-planta" />
 
                   </form>
                 </div>
