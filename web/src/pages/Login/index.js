@@ -33,6 +33,9 @@ const Login = () => {
       .then(function (response) {
         //console.log(response.status)
         localStorage.setItem('sessionToken', response.data.token);
+        localStorage.setItem('sessionUID', response.data._id);
+        localStorage.setItem('sessionEmail', response.data.email);
+        localStorage.setItem('sessionName', response.data.name);
         window.history.replaceState(null, null, "/");
         history.push('/');
       })

@@ -40,6 +40,9 @@ const Register = () => {
       .then(function (response) {
         //console.log(response.status)
         localStorage.setItem('sessionToken', response.data.token);
+        localStorage.setItem('sessionUID', response.data._id);
+        localStorage.setItem('sessionEmail', response.data.email);
+        localStorage.setItem('sessionName', response.data.name);
         history.push('/');
       })
       .catch(function (err) {

@@ -91,7 +91,10 @@ router.post('/register', async (req, res) => {
     });
     return res.status(201).json({
       message: "Bem-vindo(a) ao Plantfolio Ascii",
-      token: generateToken({id: user.id})
+      token: generateToken({id: user.id}),
+      email, 
+      _id: user.id,
+      name: user.name
     });
   }catch(err){
     console.log(err);

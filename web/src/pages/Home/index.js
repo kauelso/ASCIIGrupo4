@@ -45,7 +45,7 @@ class Home extends Component {
           <div id="topo">
             <MDBNav tabs className="nav-justified" >
               <MDBNavItem>
-                <div id="1" className="menu1" link to="#" active={this.state.activeItemJustified === "1"} onClick={this.toggleJustified("1")} role="tab">
+                <div id="1" className="menu1" link_to="#" active={this.state.activeItemJustified === "1"} onClick={this.toggleJustified("1")} role="tab">
                   <p>Minhas Plantas</p>
                 </div>
               </MDBNavItem>
