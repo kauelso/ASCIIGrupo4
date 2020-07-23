@@ -1,0 +1,203 @@
+div {
+    background-color: #131418;
+}
+div .menu1{
+    background-color: #323438;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    padding: 15px;
+    border: 0px solid #323438;}
+
+header {
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    height: 200px;
+    padding: 0;
+    margin: 0;
+}
+
+div.container5 {
+    height: 10em;
+    display: flex;
+    align-items: center
+}
+
+div#imagem {
+    margin-top: -50px;
+    margin-left: 20px;
+    margin-right: 10px;
+}
+
+div#topo {
+    background-color: #131418;
+    border-radius: 20px;
+    margin: 0;
+    padding: 0;
+    border: 0px solid #323438;
+}
+div#topo:first-child {
+    background-color: #131418;
+    border-radius: 20px;
+    margin: 0;
+    padding: 0;
+    border: 0px solid #323438;
+    position: relative;
+
+}
+div#topo p{
+   margin-bottom: 10px;
+}
+div .menu {
+    background-color: #323438;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    padding: 15px;
+    border: 0px solid #323438;
+}
+div .menu {
+    background-color: #32343800;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    padding: 15px;
+    border: 0px solid #323438;
+}
+
+div .menu:hover {
+    background-color: #323438;
+    
+}
+div#topo p {
+    color: white;
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+}
+
+div#baixo {
+    background-color: #323438;
+    color: white;
+    font-size: 25px;
+    margin-top: -15px;
+    border: -5px solid #323438;
+    border-radius: 20px;
+    padding: 15px;
+    margin-top: -30px;
+}
+div#baixo:last-child {
+    background-color: #323438;
+    color: white;
+    font-size: 25px;
+    margin-top: -15px;
+    border: -5px solid #323438;
+    border-radius: 20px;
+    padding: 15px;
+    margin-top: -30px;
+    position: relative;
+
+}
+div .form:last-child {
+   
+    position: relative;
+    text-align: left;
+    border: 1px solid #ffffff4b;
+ /*   border-radius: 10px; */
+
+}
+
+
+div#baixo .mt-2 {
+    background-color: #323438;
+    margin: 0;
+    padding: 10px;
+}
+
+form:first-child {
+    display: flex;
+    align-items: center;
+    background-color: #323438;
+    color: white;
+    font-size: 12px;
+    text-align: left;
+    position: relative;
+
+}
+
+form input {
+    margin: 4px;
+    text-align: center;
+    border: 0.1px solid #ffffff4b;
+    border-radius: 10px;
+}
+
+
+form h1 {
+    
+    margin-top: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+form label .nomeG {
+    margin: 4px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+
+form input#date {
+    text-align: center;
+    padding: 4px;
+    max-width: 160px;
+}
+.botão-submit {
+    text-align: center;
+    color: white;
+    max-width: 400px;
+    font-size: 18px;
+    background-color: #1baf63;
+
+}
+.botão-submit:hover {
+    background-color: rgba(0, 221, 118, 0.596);
+}
+form label {
+    text-align: center;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    margin: 4px;
+    margin-top: 15px;
+}
+
+textarea {
+    background-color: #323438;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    border: 0.1px solid #ffffff4b;
+    border-radius: 10px;
+    width: 450px;
+    height: 50px;
+}
+
+button {
+    background-color: #787a7e81;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 0px solid #323438;
+    border-radius: 10px;
+    max-width: 250px;
+
+}
+
+button:hover {
+    background-color: #2f303381;
+}
