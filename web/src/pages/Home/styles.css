@@ -201,3 +201,45 @@ button {
 button:hover {
     background-color: #2f303381;
 }
+
+.tg  {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+.tg td{
+    border-color:#323438;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+}
+.tg th{
+    border-color :#323438;
+    border-style:solid;
+    border-width:1px;
+    font-family:Arial, sans-serif;
+    font-size:14px;
+  font-weight:normal;
+  overflow:hidden;
+  padding:10px 5px;
+  word-break:normal;
+}
+.tg .tg-var3{
+    border-color:initial;
+    text-align:left;
+    vertical-align:middle
+}
+.tg .tg-var1{
+    border-color:initial;
+    text-align:center;
+    vertical-align:middle
+}
+.tg .tg-var2{
+    border-color:initial;
+    text-align:left;
+    vertical-align:top
+}
+@media screen and (max-width: 767px) {.tg {width: auto !important;}.tg col {width: auto !important;}.tg-wrap {overflow-x: auto;-webkit-overflow-scrolling: touch;}}

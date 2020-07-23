@@ -76,16 +76,30 @@ class Home extends Component {
               activeItem={this.state.activeItemJustified}
             >
               <MDBTabPane tabId="1" role="tabpanel">
-                <p className="mt-2">
-                  Raw denim you probably haven't heard of them jean shorts
-                  Austin. Nesciunt tofu stumptown aliqua, retro synth master
-                  cleanse. Mustache cliche tempor, williamsburg carles vegan
-                  helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
-                  synth. Cosby sweater eu banh mi, qui irure terry richardson
-                  ex squid. Aliquip placeat salvia cillum iphone. Seitan
-                  aliquip quis cardigan american apparel, butcher voluptate
-                  nisi qui.
-              </p>
+              <div class="tg-wrap">
+                <table class="tg">
+                  <thead>
+                    <tr>
+                      <th className="tg-var1" rowspan="2">foto panta</th>
+                      <th className="tg-var2" colspan="2">nome planta</th>
+                      <th className="tg-var2" rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th className="tg-var3" rowspan="2">icone regador</th>
+                      <th className="tg-var3" rowspan="2">ultima regada</th>
+                      <th className="tg-var2" rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th className="tg-var2">arquivar</th>
+                      <th className="tg-var2">favoritar</th>
+                    </tr>
+                    <tr>
+                      <td className="tg-var2">tipo planta</td>
+                      <td className="tg-var2">data adesao</td>
+                      <td className="tg-var2">"arquivar"</td>
+                      <td className="tg-var2">"favoritar"</td>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+
+
               </MDBTabPane>
               <MDBTabPane tabId="2" role="tabpanel">
                 <div className="form">
