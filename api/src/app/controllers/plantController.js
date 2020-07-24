@@ -110,15 +110,15 @@ router.get('/:plantId', async (req, res) => { // listar planta por id
   }
 });
 
-router.post('/', async (req, res) => { // criar planta
+router.post('/',async (req, res) => { // criar planta
   // console.log(req.body);
   const { scientificName, popularName, description, 
-    comments, plantType,plantImage
+    comments, plantType
   } = req.body;
   try {
     const plant = await Plant.create({
       scientificName, assignedToUser: req.userId, description,
-      popularName, plantType, plantImage
+      popularName, plantType
     });
 
     //aguardar tds promises do map concluirem

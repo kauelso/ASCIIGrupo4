@@ -7,6 +7,14 @@ api.defaults.headers.common['Authorization'] =
 const NewPlant = () => {
   const history = useHistory();
   const [sucesso, setSucesso] = useState(false);
+  let plantImage = undefined;
+  let filename = undefined;
+
+  function onChangeHandler(event){
+
+    plantImage = event.target.files[0];
+
+}
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -15,7 +23,7 @@ const NewPlant = () => {
     let popularName = document.getElementById('nomeGenerico');
     let description = document.getElementById('msg');
     let plantType = document.getElementById('tipoPlanta');
-    let plantImage = document.getElementById('IMGplanta').files[0];
+    let inputPlant = document.getElementById('img')
 
     if(popularName.value.toString() === '' || description.value.toString() === ''
       || plantType.value.toString() === ''){
@@ -39,12 +47,20 @@ const NewPlant = () => {
       scientificName: scientificName.value, popularName: popularName.value,
       description: description.value, comments: [], plantType: plantType.value
     }
-    
 
-    api.post('/api/imageupload',plantImage,{headers: headers}).then(function(response){
-      console.log(response);
-      return;
-    })
+    const fileHeader = {
+      'Content-Type': 'multipart/form-data',
+      'Authorization': 'Bearer '+ localStorage.getItem('sessionToken')
+    }
+
+    const plantData = new FormData();
+    plantData.append('file',plantImage);
+
+    api.post('/api/uploadimage/post',plantData)
+    .then(res => { // then print response status
+      inputPlant.files = [];
+      console.log(res.statusText)})
+
     api.post('/api/plants', data, {headers: headers
     }).then(function (response){
       if(!response){
@@ -80,7 +96,7 @@ const NewPlant = () => {
         <input type="text" placeholder="Tipo da Planta (ex: Flor)" id="tipoPlanta" />
         <label for="msg">Adicione uma descrição</label>
         <textarea id="msg" placeholder="Descrição da planta"></textarea>
-        <input type="file" id="IMGplanta" />
+        <input type="file" name="file" onChange={onChangeHandler} id='img'/>
         <p id="plantError"  className="hidden">Não foi possível criar a planta, tente novamente!</p>
         <input type="submit" value="Registrar Planta" 
           className="botão-submit" id="botão-planta" onClick={handleSubmit} 
