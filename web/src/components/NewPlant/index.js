@@ -49,17 +49,17 @@ const NewPlant = () => {
     }
 
     const fileHeader = {
-      'Content-Type': 'multipart/form-data',
-      'Authorization': 'Bearer '+ localStorage.getItem('sessionToken')
+      'content-Type': 'multipart/form-data',
     }
 
     const plantData = new FormData();
     plantData.append('file',plantImage);
 
-    api.post('/api/uploadimage/post',plantData)
-    .then(res => { // then print response status
-      inputPlant.files = [];
-      console.log(res.statusText)})
+    api.post('/api/imageupload/post',plantData,fileHeader)
+    .then(res => {
+      console.log(res.data + 'this is data after api call');
+   })
+   .catch(err => console.log(err));
 
     api.post('/api/plants', data, {headers: headers
     }).then(function (response){
