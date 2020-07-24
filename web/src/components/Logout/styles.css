@@ -1,0 +1,10 @@
+form h1 {
+    color: white;
+
+}
+
+form input#botao-sair {
+    background-color: #af1b1b9a;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
