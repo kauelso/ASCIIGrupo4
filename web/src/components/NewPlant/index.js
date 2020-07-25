@@ -1,3 +1,4 @@
+import './styles.css';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import api from "../../services/api";
@@ -63,8 +64,8 @@ const NewPlant = () => {
   }
 
   return (
-    <div className="form">
-      <form action="" onSubmit={handleSubmit}>
+    <div id="form">
+      <form id="home" action="" onSubmit={handleSubmit}>
         <h1>ADICIONAR PLANTA</h1>
         <label for="nomeGenerico" for="nomeG">Adicione um nome à Planta</label>
         <input type="text" placeholder="Nome Genérico da Planta" id="nomeGenerico" />

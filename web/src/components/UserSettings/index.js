@@ -1,3 +1,4 @@
+import './styles.css';
 import React from "react";
 
 import api from '../../services/api';
@@ -92,8 +93,8 @@ const UserSettings = () => {
   }
 
   return (
-    <div className="form">
-      <form action="" onSubmit={handleSubmit}>
+    <div id="form">
+      <form id="home" action="" onSubmit={handleSubmit}>
         <h1>ALTERAR DADOS</h1>
         <label className="nomeG" >Altere seu nome</label>
         <input type="text" placeholder={localStorage.getItem('sessionName')} id="Altnome"/>
