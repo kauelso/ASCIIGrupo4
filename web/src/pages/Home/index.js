@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
 // import { Container } from 'rbx';
 
+import SelectPage from '../../components/SelectPage';
 import NewPlant from '../../components/NewPlant';
 import MyPlants from '../../components/MyPlants';
 import Logout from '../../components/Logout';
@@ -72,7 +73,8 @@ class Home extends Component {
               className="card"
               activeItem={this.state.activeItemJustified}>
               <MDBTabPane tabId="1" role="tabpanel">
-                <MyPlants/>
+              <SelectPage/>
+              <MyPlants/>
               </MDBTabPane>
               <MDBTabPane tabId="2" role="tabpanel">
                 <NewPlant/>

@@ -1,0 +1,19 @@
+#appearance-select{
+     text-align: center;
+    color: white;
+    font-size: 17px;
+    padding: 2px;
+    padding-left: 19px;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    -webkit-appearance: none;  /* Remove estilo padrão do Chrome */
+    -moz-appearance: none; /* Remove estilo padrão do FireFox */
+    appearance: none; /* Remove estilo padrão do FireFox*/
+    width: 200px; /* Tamanho do select, maior que o tamanho da div "div-select" */
+    height:40px; /* Altura do select, importante para que tenha a mesma altura em todo os navegadores */
+    border:0px solid #323438;
+    border-radius: 20px;
+    background-color: #33ff8d;
+ }
+ 
