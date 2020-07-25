@@ -8,7 +8,7 @@ const NewPlant = () => {
   const history = useHistory();
   const [sucesso, setSucesso] = useState(false);
   let plantImage = undefined;
-  let filename = undefined;
+  
 
   function onChangeHandler(event){
 
@@ -23,7 +23,8 @@ const NewPlant = () => {
     let popularName = document.getElementById('nomeGenerico');
     let description = document.getElementById('msg');
     let plantType = document.getElementById('tipoPlanta');
-    let inputPlant = document.getElementById('img')
+    let inputPlant = document.getElementById('img');
+    let filename = undefined;
 
     if(popularName.value.toString() === '' || description.value.toString() === ''
       || plantType.value.toString() === ''){
@@ -55,11 +56,11 @@ const NewPlant = () => {
     const plantData = new FormData();
     plantData.append('file',plantImage);
 
-    api.post('/api/imageupload/post',plantData,fileHeader)
-    .then(res => {
-      console.log(res.data + 'this is data after api call');
-   })
-   .catch(err => console.log(err));
+  //   api.post('/api/imageupload/post',plantData,fileHeader)
+  //   .then(res => {
+  //     console.log(res.data + 'this is data after api call');
+  //  })
+  //  .catch(err => console.log(err));
 
     api.post('/api/plants', data, {headers: headers
     }).then(function (response){
@@ -70,6 +71,16 @@ const NewPlant = () => {
       // planta criada
       console.log(response);
       setSucesso(true);
+
+      api.post('/api/imageupload/post',plantData,fileHeader)
+    .then(function(res) {
+      filename = res.data.filename;
+      console.log(response)
+      console.log(response.data.plant._id);
+      console.log(filename)
+      api.put('/api/plants/putimg/'+ response.data.plant._id,{plantImage:filename},{headers:headers})
+   })
+   .catch(err => console.log(err));
       let plantError = document.getElementById('plantError');
       scientificName.value = "";
       popularName.value = "";
