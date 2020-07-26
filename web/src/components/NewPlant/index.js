@@ -34,6 +34,7 @@ const NewPlant = () => {
       popularName.value = "";
       description.value = "";
       plantType.value = "";
+      inputPlant.value = null;
       plantError.classList.remove('hidden');
       return;
     }
@@ -86,6 +87,7 @@ const NewPlant = () => {
       popularName.value = "";
       description.value = "";
       plantType.value = "";
+      inputPlant.value = null;
       plantError.classList.add('hidden');
     }).catch(function (err){
       // console.log(err);
