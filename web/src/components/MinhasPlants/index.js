@@ -103,7 +103,7 @@ const MinhasPlants = () => {
     <div className="myplants-container">
       {/* <SelectPage /> */}
       <select id="selectFiltro" onChange={handleFiltros} onSubmit={handleFiltros}>
-        <option value="0" >Aplicar filtros</option>
+        <option value="0" >Nenhum Filtro</option>
         <option value="1" >Data de postagem crescente</option>
         <option value="2" >Favoritas</option>
         <option value="3" >Arquivadas</option>
