@@ -5,6 +5,7 @@ import { FaFileArchive, FaHeart } from 'react-icons/fa';
 import { GiWateringCan } from 'react-icons/gi';
 
 const Plant = (props) => {
+  let parsedTime =(props.plantDate.slice(0,10) +" "+props.plantDate.slice(11,16));
   return (
     <div className="plant-container">
       <div className="plant-side">
@@ -12,7 +13,7 @@ const Plant = (props) => {
         
         <div className="plant-info">
           <h1>{props.plantName}</h1>
-          <p>{props.plantType} <span>{props.plantDate}</span></p>
+          <p>{props.plantType} <span>{parsedTime}</span></p>
         </div>
       </div>
 
