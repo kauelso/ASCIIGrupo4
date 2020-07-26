@@ -72,6 +72,20 @@ display: none;
     margin-top: 15px;
 }
 
+#newplant-form > #plantErrorType {
+    padding: 0;
+    font-size: 14px;
+    color: #f23;
+    margin-top: 15px;
+}
+
+#newplant-form > #plantErrorSize {
+    padding: 0;
+    font-size: 14px;
+    color: #f23;
+    margin-top: 15px;
+}
+
 /* Esconde o input
 input[type='file'] {
     display: none

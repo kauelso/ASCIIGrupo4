@@ -63,11 +63,23 @@ const NewPlant = () => {
   //     console.log(res.data + 'this is data after api call');
   //  })
   //  .catch(err => console.log(err));
-
+    console.log(plantImage);
     api.post('/api/plants', data, {headers: headers
     }).then(function (response){
       if(!response){
         // planta nao criada
+        return;
+      }
+      if(plantImage.size > (2 *1024 *1024)){
+        //arquivo muito grande
+        let plantError = document.getElementById('plantErrorSize');
+        plantError.classList.remove('hidden');
+        return;
+      }
+      if(plantImage.type != "image/png" && plantImage.type != "image/jpg" && plantImage.type != "image/pjpeg" && plantImage.type != "image/jpeg"){
+        //arquivo nao é uma imagem
+        let plantError = document.getElementById('plantErrorType');
+        plantError.classList.remove('hidden');
         return;
       }
       // planta criada
@@ -84,12 +96,16 @@ const NewPlant = () => {
    })
    .catch(err => console.log(err));
       let plantError = document.getElementById('plantError');
+      let plantErrorType = document.getElementById('plantErrorType');
+      let plantErrorSize = document.getElementById('plantErrorSize');
       inputPlant.value = null;
       scientificName.value = "";
       popularName.value = "";
       description.value = "";
       plantType.value = "";
       plantError.classList.add('hidden');
+      plantErrorType.classList.add('hidden');
+      plantErrorSize.classList.add('hidden');
     }).catch(function (err){
       // console.log(err);
       setSucesso(false);
@@ -114,6 +130,8 @@ const NewPlant = () => {
       <input type="file" name="file" onChange={onChangeHandler} id='img'/>
 
       <p id="plantError"  className="hidden">Não foi possível criar a planta, tente novamente!</p>
+      <p id="plantErrorSize"  className="hidden">Não foi possível criar a planta, arquivo maior que 2 MB</p>
+      <p id="plantErrorType"  className="hidden">Não foi possível criar a planta, arquivo nao é uma imagem</p>
       <input type="submit" value="Registrar Planta" 
         className="botão-submit" id="btnPlanta" onClick={handleSubmit} 
       />
