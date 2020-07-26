@@ -58,12 +58,6 @@ const NewPlant = () => {
     const plantData = new FormData();
     plantData.append('file',plantImage);
 
-  //   api.post('/api/imageupload/post',plantData,fileHeader)
-  //   .then(res => {
-  //     console.log(res.data + 'this is data after api call');
-  //  })
-  //  .catch(err => console.log(err));
-    console.log(plantImage);
     api.post('/api/plants', data, {headers: headers
     }).then(function (response){
       if(!response){
