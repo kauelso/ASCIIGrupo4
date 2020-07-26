@@ -10,6 +10,8 @@ router.post("/post",(req,res)=>{
             return res.status(500).json(err)
         } else if (err) {
             return res.status(500).json(err)
+        }else if(!req.file){
+            return res.status(200).json({filename: "default.jpg"});
         }
         return res.status(200).json({filename: req.file.filename});
 

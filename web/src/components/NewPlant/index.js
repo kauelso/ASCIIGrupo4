@@ -58,22 +58,23 @@ const NewPlant = () => {
     const plantData = new FormData();
     plantData.append('file',plantImage);
 
+    if(plantImage && plantImage.size > (2 *1024 *1024)){
+      //arquivo muito grande
+      let plantError = document.getElementById('plantErrorSize');
+      plantError.classList.remove('hidden');
+      return;
+    }
+    else if(plantImage &&(plantImage.type != "image/png" && plantImage.type != "image/jpg" && plantImage.type != "image/pjpeg" && plantImage.type != "image/jpeg")){
+      //arquivo nao é uma imagem
+      let plantError = document.getElementById('plantErrorType');
+      plantError.classList.remove('hidden');
+      return;
+    }
+    else{
     api.post('/api/plants', data, {headers: headers
     }).then(function (response){
       if(!response){
         // planta nao criada
-        return;
-      }
-      if(plantImage && plantImage.size > (2 *1024 *1024)){
-        //arquivo muito grande
-        let plantError = document.getElementById('plantErrorSize');
-        plantError.classList.remove('hidden');
-        return;
-      }
-      if(plantImage &&(plantImage.type != "image/png" && plantImage.type != "image/jpg" && plantImage.type != "image/pjpeg" && plantImage.type != "image/jpeg")){
-        //arquivo nao é uma imagem
-        let plantError = document.getElementById('plantErrorType');
-        plantError.classList.remove('hidden');
         return;
       }
       // planta criada
@@ -105,7 +106,7 @@ const NewPlant = () => {
       setSucesso(false);
       let plantError = document.getElementById('plantError');
       plantError.classList.remove('hidden');
-    });
+    });}
   }
 
   return (
