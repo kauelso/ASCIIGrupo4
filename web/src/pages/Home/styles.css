@@ -14,6 +14,7 @@ div .menu1 {
     margin-bottom: 5px;
     padding: 15px;
     border: 0px solid #323438;
+    cursor: pointer;
 }
 
 header {
@@ -67,6 +68,7 @@ div .menu {
     margin-bottom: 5px;
     padding: 15px;
     border: 0px solid #323438;
+    cursor: pointer;
 }
 
 div .menu {

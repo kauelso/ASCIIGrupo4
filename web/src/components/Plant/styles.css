@@ -1,0 +1,109 @@
+.plant-container {
+  background-color:#323438;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  margin: 8px auto;
+  border-bottom: 1px solid #0d7;
+}
+
+.plant-container > img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  margin: 4px;
+  padding: 0;
+  background: rgba(0,0,0,0);
+  border: 1px solid #fff;
+  display: flex;
+  text-align:center;
+  align-items: center;
+  justify-content:center;
+}
+
+.plant-container > button {
+  border: none;
+  background-color: #0d7;
+  color: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content:center
+}
+
+.plant-container > button:hover {
+  border: none;
+  background: linear-gradient(45deg,#0d7, #0f5);
+}
+
+.plant-container > button > p, .plant-container > button > h1{
+  color: #0d0d0d;
+  margin: 0;
+  padding: 0;
+}
+
+.plant-container > p {
+  color: #999;
+  padding: 0;
+  font-size: 15px;
+}
+
+.plant-info {
+  background-color: #323438;
+}
+
+.plant-info > h1 {
+  font-size: 18px;
+  color: #FFF;
+  padding: 0;
+}
+
+.plant-info > p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #999;
+  padding: 0;
+}
+
+.plant-info > p > span {
+  font-size: 12px;
+  font-style: italic;
+  margin-left: 15px;
+  padding: 0;
+}
+
+.plant-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #323438;
+}
+
+.plant-action {
+  margin: 4px;
+  width: 80px;
+  background-color: #323438;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.plant-action:hover {
+  border: none;
+  background-color: #232428;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.plant-action > p, .plant-action > h1 {
+  font-size: 14px;
+  color: #fff;
+  padding: 0;
+}
+
+.plant-action > h1 {
+  font-size: 32px;
+}

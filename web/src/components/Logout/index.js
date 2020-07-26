@@ -1,17 +1,22 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
+
 import './styles.css';
 
-
 const Logout = () => {
+  const history = useHistory();
+  function handleLogout(){
+    localStorage.removeItem('sessionToken');
+    localStorage.removeItem('sessionEmail');
+    localStorage.removeItem('sessionName');
+    localStorage.removeItem('sessionUID');
+    history.push('/login');
+  }
+  
   return (
-    <div id="form">
-      <form id="home" action="" >
-        <h1>PARA FAZER O LOGOUT CLIQUE NO BOTÃO ABAIXO</h1>
-        
-        <input type="submit" value="SAIR" 
-          className="botão-submit" id="botao-sair"  
-        />
-      </form>
+    <div className="logout-container">
+      <p> Clique no botao abaixo para fazer logout</p>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 }
