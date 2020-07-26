@@ -9,7 +9,13 @@
   border-bottom: 1px solid #0d7;
 }
 
-.plant-container > img {
+.plant-side {
+  background-color: #323438;
+  display: flex;
+  align-items: center;
+}
+
+.plant-side > img {
   height: 100px;
   width: 100px;
   border-radius: 50%;
@@ -43,10 +49,17 @@
   padding: 0;
 }
 
-.plant-container > p {
+.plant-body {
+  display: flex;
+  align-items: center;
+  background-color: #323438;
+}
+
+.plant-body > p {
   color: #999;
   padding: 0;
   font-size: 15px;
+  background-color: #323438;
 }
 
 .plant-info {
@@ -89,6 +102,7 @@
   justify-content: center;
   align-items: center;
   border: none;
+  padding: 5px;
 }
 
 .plant-action:hover {
@@ -106,4 +120,55 @@
 
 .plant-action > h1 {
   font-size: 32px;
+}
+
+@media (max-width: 885px){
+  .plant-side {
+    flex-direction: column;
+    text-align: center;
+    margin-left: 15px;
+  }
+  .plant-info > h1 {
+    margin-top: 5px;
+  }
+  .plant-info > p > span{
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 770px){
+  .plant-body {
+    flex-direction: column;
+  }
+  .plant-body > p {
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 520px){
+  .plant-side > img {
+    height: 70px;
+    width: 70px;
+  }
+  .plant-info > h1 {
+    font-size: 14px;
+  }
+
+  .plant-info > p {
+    font-size: 12px;
+  }
+
+  .plant-info > p > span {
+    font-size: 10px;
+  }
+
+  .plant-action {
+    width: 55px;
+    margin: 0 5px;
+    padding: 5px;
+  }
+
+  .plant-action > p {
+    font-size: 12px;
+  }
 }

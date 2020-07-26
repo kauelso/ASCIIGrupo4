@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 
-import './styles.css';
+import './styles.css'; 
 
 import api from "../../services/api";
 
@@ -97,24 +97,25 @@ const NewPlant = () => {
   }
 
   return (
-    <div className="form">
-      <form action="" onSubmit={handleSubmit} enctype="multipart/form-data">
-        <h1>ADICIONAR PLANTA</h1>
-        <label for="nomeGenerico" for="nomeG">Adicione um nome à Planta</label>
-        <input type="text" placeholder="Nome Genérico da Planta" id="nomeGenerico" />
-        <label for="nomeCientifico">Adicione o nome científico da planta</label>
-        <input type="text" placeholder="Nome Científico da Planta (Opcional)" id="nomeCientifico" />
-        <label for="tipoPlanta">Adicione o tipo da planta</label>
-        <input type="text" placeholder="Tipo da Planta (ex: Flor)" id="tipoPlanta" />
-        <label for="msg">Adicione uma descrição</label>
-        <textarea id="msg" placeholder="Descrição da planta"></textarea>
-        <input type="file" name="file" onChange={onChangeHandler} id='img'/>
-        <p id="plantError"  className="hidden">Não foi possível criar a planta, tente novamente!</p>
-        <input type="submit" value="Registrar Planta" 
-          className="botão-submit" id="botão-planta" onClick={handleSubmit} 
-        />
-      </form>
-    </div>
+    <form action="" onSubmit={handleSubmit} enctype="multipart/form-data" id="newplant-form">
+      <h1>ADICIONAR PLANTA</h1>
+      <label htmlFor="nomeG">Adicione um nome à Planta</label>
+      <input type="text" placeholder="Nome Genérico da Planta" id="nomeGenerico" />
+      <label htmlFor="nomeCientifico">Adicione o nome científico da planta</label>
+      <input type="text" placeholder="Nome Científico da Planta (Opcional)" id="nomeCientifico" />
+      <label htmlFor="tipoPlanta">Adicione o tipo da planta</label>
+      <input type="text" placeholder="Tipo da Planta (ex: Flor)" id="tipoPlanta" />
+      <label htmlFor="msg">Adicione uma descrição</label>
+      <textarea id="msg" placeholder="Descrição da planta"></textarea>
+      
+      <label htmlFor="img" id="selecFileLabel">Adicionar imagem da planta</label>
+      <input type="file" name="file" onChange={onChangeHandler} id='img'/>
+
+      <p id="plantError"  className="hidden">Não foi possível criar a planta, tente novamente!</p>
+      <input type="submit" value="Registrar Planta" 
+        className="botão-submit" id="btnPlanta" onClick={handleSubmit} 
+      />
+    </form>
   );
 }
 

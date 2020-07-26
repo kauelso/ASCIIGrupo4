@@ -11,7 +11,9 @@
     justify-content:center;
     align-items: center;
     background-color: #323438;
-    height: 350px;
+    min-height: 450px;
+    width: 100%;
+    margin: 5px auto;
     padding: 15px;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
@@ -30,7 +32,7 @@ display: none;
     text-align: left;
     color: #fff;
     font-size: 18px;
-    margin-top: 15px;
+    margin: 10px 5px;
 }
 
 #newplant-form > input {
@@ -38,16 +40,19 @@ display: none;
     background-color: #434548;
     color: #999;
     font-size: 16px;
+    width: 100%;
+    max-width: 450px;
+    margin: 5px auto;
 }
 
 #newplant-form > textarea {
     max-width: 450px;
-    min-width: 450px;
+    width: 100%;
     min-height: 50px;
     background-color: #434548;
     border: none;
     color: #999;
-    margin: 15px;
+    margin: 15px auto;
     font-size: 16px;
     padding: 5px;
     -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
@@ -57,10 +62,27 @@ display: none;
 #newplant-form > #btnPlanta {
     background-color: #0d7;
     color: #0d0d0d;
+    margin: 15px auto;
 }
 
 #newplant-form > #plantError {
     padding: 0;
     font-size: 14px;
     color: #f23;
+    margin-top: 15px;
 }
+
+/* Esconde o input
+input[type='file'] {
+    display: none
+}
+  
+//Aparência que terá o seletor de arquivo 
+#selecFileLabel {
+    background-color: #3498db;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+    padding: 6px 20px
+} */

@@ -10,7 +10,7 @@
   display: none;
 }
 
-#appearance-select{
+#selectFiltro{
   text-align: center;
  color: white;
  font-size: 17px;
@@ -30,6 +30,6 @@
  color: #0d0d0d;
 }
 
-#appearance-select:hover {
+#selectFiltro:hover {
  cursor: pointer;
 }
