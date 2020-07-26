@@ -6,5 +6,7 @@ web/node_modules/
 package-lock.json
 api/src/app/.env
 api/src/.env
-api/src/tmp/
-
+.env
+yarn-lock
+node_modules
+yarn-error.log
