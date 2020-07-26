@@ -64,13 +64,13 @@ const NewPlant = () => {
         // planta nao criada
         return;
       }
-      if(plantImage.size > (2 *1024 *1024)){
+      if(plantImage && plantImage.size > (2 *1024 *1024)){
         //arquivo muito grande
         let plantError = document.getElementById('plantErrorSize');
         plantError.classList.remove('hidden');
         return;
       }
-      if(plantImage.type != "image/png" && plantImage.type != "image/jpg" && plantImage.type != "image/pjpeg" && plantImage.type != "image/jpeg"){
+      if(plantImage &&(plantImage.type != "image/png" && plantImage.type != "image/jpg" && plantImage.type != "image/pjpeg" && plantImage.type != "image/jpeg")){
         //arquivo nao é uma imagem
         let plantError = document.getElementById('plantErrorType');
         plantError.classList.remove('hidden');
