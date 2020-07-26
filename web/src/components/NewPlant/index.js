@@ -31,6 +31,7 @@ const NewPlant = () => {
       || plantType.value.toString() === ''){
       
       let plantError = document.getElementById('plantError');
+      inputPlant.value = null;
       scientificName.value = "";
       popularName.value = "";
       description.value = "";
@@ -83,6 +84,7 @@ const NewPlant = () => {
    })
    .catch(err => console.log(err));
       let plantError = document.getElementById('plantError');
+      inputPlant.value = null;
       scientificName.value = "";
       popularName.value = "";
       description.value = "";
