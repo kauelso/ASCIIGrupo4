@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
+
+import './styles.css';
+
 import api from "../../services/api";
-api.defaults.headers.common['Authorization'] = 
-                                'Bearer ' + localStorage.getItem('jwtToken');
 
 const NewPlant = () => {
   const history = useHistory();

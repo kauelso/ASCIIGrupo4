@@ -1,0 +1,66 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#newplant-form {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    background-color: #323438;
+    height: 350px;
+    padding: 15px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
+    scrollbar-width: none;  /* Hide Scrollbar Firefox */
+}
+  
+#newplant-form::-webkit-scrollbar { /* Hide Scrollbar Chrome*/
+display: none;
+}
+
+#newplant-form > h1 {
+    margin: 15px;
+}
+
+#newplant-form > label {
+    text-align: left;
+    color: #fff;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+#newplant-form > input {
+    padding: 10px;
+    background-color: #434548;
+    color: #999;
+    font-size: 16px;
+}
+
+#newplant-form > textarea {
+    max-width: 450px;
+    min-width: 450px;
+    min-height: 50px;
+    background-color: #434548;
+    border: none;
+    color: #999;
+    margin: 15px;
+    font-size: 16px;
+    padding: 5px;
+    -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
+    scrollbar-width: none;  /* Hide Scrollbar Firefox */
+}
+
+#newplant-form > #btnPlanta {
+    background-color: #0d7;
+    color: #0d0d0d;
+}
+
+#newplant-form > #plantError {
+    padding: 0;
+    font-size: 14px;
+    color: #f23;
+}

@@ -1,0 +1,35 @@
+.myplants-container {
+  background-color: #323438;
+  height: 350px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
+  scrollbar-width: none;  /* Hide Scrollbar Firefox */
+}
+
+.myplants-container::-webkit-scrollbar { /* Hide Scrollbar Chrome*/
+  display: none;
+}
+
+#appearance-select{
+  text-align: center;
+ color: white;
+ font-size: 17px;
+ padding: 2px;
+ padding-left: 19px;
+ margin-top: 20px;
+ margin-left: 20px;
+ margin-bottom: 20px;
+ -webkit-appearance: none;  /* Remove estilo padrão do Chrome */
+ -moz-appearance: none; /* Remove estilo padrão do FireFox */
+ appearance: none; /* Remove estilo padrão do FireFox*/
+ width: 200px; /* Tamanho do select, maior que o tamanho da div "div-select" */
+ height:40px; /* Altura do select, importante para que tenha a mesma altura em todo os navegadores */
+ border:0px solid #323438;
+ border-radius: 12px;
+ background-color: #0d7;
+ color: #0d0d0d;
+}
+
+#appearance-select:hover {
+ cursor: pointer;
+}

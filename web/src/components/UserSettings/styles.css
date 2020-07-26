@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+#usersettings-form {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    background-color: #323438;
+    height: 350px;
+    padding: 15px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
+    scrollbar-width: none;  /* Hide Scrollbar Firefox */
+}
+  
+#usersettings-form::-webkit-scrollbar { /* Hide Scrollbar Chrome*/
+display: none;
+}
+
+#usersettings-form > h1 {
+    margin: 16px;
+}
+
+#usersettings-form > label {
+    text-align: left;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+#usersettings-form > input {
+    padding: 10px;
+    background-color: #434548;
+    color: #999;
+    font-size: 16px;
+}
+
+#usersettings-form > textarea {
+    max-width: 450px;
+    min-width: 450px;
+    min-height: 50px;
+    background-color: #434548;
+    border: none;
+    color: #999;
+    margin: 15px;
+    font-size: 16px;
+    padding: 5px;
+    -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
+    scrollbar-width: none;  /* Hide Scrollbar Firefox */
+}
+
+#usersettings-form > #btnUsersettings {
+    background-color: #0d7;
+    color: #0d0d0d;
+    margin-top: 10px;
+}

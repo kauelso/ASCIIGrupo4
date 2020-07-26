@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.logout-container {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    background-color: #323438;
+    height: 350px;
+    padding: 15px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* Hide Scrollbar IE and Edge */
+    scrollbar-width: none;  /* Hide Scrollbar Firefox */
+}
+  
+.logout-container::-webkit-scrollbar { /* Hide Scrollbar Chrome*/
+display: none;
+}
+
+.logout-container > p {
+    color: #fff;
+}
+
+.logout-container > button {
+    background-color: #0d7;
+    color: #0d0d0d;
+    border: none;
+    border-radius: 8px;
+    padding: 5px;
+}

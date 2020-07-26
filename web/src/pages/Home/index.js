@@ -7,7 +7,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBTabPane, MDBTabContent, MDBNav, MDBNav
 // import { Container } from 'rbx';
 
 import NewPlant from '../../components/NewPlant';
-import MyPlants from '../../components/MyPlants';
+import MinhasPlants from '../../components/MinhasPlants';
 import Logout from '../../components/Logout';
 import UserSettings from '../../components/UserSettings';
 
@@ -72,7 +72,7 @@ class Home extends Component {
               className="card"
               activeItem={this.state.activeItemJustified}>
               <MDBTabPane tabId="1" role="tabpanel">
-                <MyPlants/>
+                <MinhasPlants/>
               </MDBTabPane>
               <MDBTabPane tabId="2" role="tabpanel">
                 <NewPlant/>

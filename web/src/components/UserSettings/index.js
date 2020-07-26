@@ -93,23 +93,21 @@ const UserSettings = () => {
   }
 
   return (
-    <div className="form">
-      <form action="" onSubmit={handleSubmit}>
-        <h1>ALTERAR DADOS</h1>
-        <label className="nomeG" >Altere seu nome</label>
-        <input type="text" placeholder={localStorage.getItem('sessionName')} id="Altnome"/>
-        <label >Este é o seu e-mail</label>
-        <input type="email" id="Altemail" name="Altemail" value={localStorage.getItem('sessionEmail')} readOnly="readonly"/>
-        <label >Altere sua senha</label>
-        <input type="password" placeholder="Sua senha atual" id="oldPassword" name="oldPassword" onChange={()=>{document.getElementById('oldPassword').classList.remove('red')}}/>
-        <label >Escolha sua nova senha</label>
-        <input type="password" placeholder="Sua nova senha" id="Altsenha1" onChange={()=>{document.getElementById("Altsenha1").classList.remove('red')}} />
-        <label >Confirme sua nova senha</label>
-        <input type="password" placeholder="Confirme sua nova senha" id="Altsenha2" name="Altsenha2" onChange={()=>{document.getElementById("Altsenha2").classList.remove('red')}}/>
-        <input type="submit" value="Registrar Alterações" className="botão-submit" 
-          id="botão-planta" onClick={handleSubmit}/>
-      </form>
-    </div>
+    <form action="" onSubmit={handleSubmit} id="usersettings-form">
+      <h1>ALTERAR DADOS</h1>
+      <label className="nomeG" >Altere seu nome</label>
+      <input type="text" placeholder={localStorage.getItem('sessionName')} id="Altnome"/>
+      <label >Este é o seu e-mail</label>
+      <input type="email" id="Altemail" name="Altemail" value={localStorage.getItem('sessionEmail')} readOnly="readonly"/>
+      <label >Altere sua senha</label>
+      <input type="password" placeholder="Sua senha atual" id="oldPassword" name="oldPassword" onChange={()=>{document.getElementById('oldPassword').classList.remove('red')}}/>
+      <label >Escolha sua nova senha</label>
+      <input type="password" placeholder="Sua nova senha" id="Altsenha1" onChange={()=>{document.getElementById("Altsenha1").classList.remove('red')}} />
+      <label >Confirme sua nova senha</label>
+      <input type="password" placeholder="Confirme sua nova senha" id="Altsenha2" name="Altsenha2" onChange={()=>{document.getElementById("Altsenha2").classList.remove('red')}}/>
+      <input type="submit" value="Registrar Alterações" className="botão-submit" 
+        id="btnUsersettings" onClick={handleSubmit}/>
+    </form>
   );
 }
 

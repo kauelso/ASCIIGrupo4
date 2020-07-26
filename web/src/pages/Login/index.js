@@ -31,16 +31,16 @@ const Login = () => {
       email, password
     })
       .then(function (response) {
-        //console.log(response.status)
+        // console.log(response)
         localStorage.setItem('sessionToken', response.data.token);
-        localStorage.setItem('sessionUID', response.data._id);
-        localStorage.setItem('sessionEmail', response.data.email);
-        localStorage.setItem('sessionName', response.data.name);
-        window.history.replaceState(null, null, "/");
+        localStorage.setItem('sessionUID', response.data.user._id);
+        localStorage.setItem('sessionEmail', response.data.user.email);
+        localStorage.setItem('sessionName', response.data.user.name);
+        // window.history.replaceState(null, null, "/");
         history.push('/');
       })
       .catch(function (err) {
-        console.log(err);
+        // console.log(err);
         document.getElementById('login-email').setAttribute('class', 'red');
         document.getElementById('login-password').setAttribute('class', 'red');
       })
