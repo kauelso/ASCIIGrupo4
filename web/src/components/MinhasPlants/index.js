@@ -2,11 +2,12 @@ import React, { useState, useEffect   } from 'react';
 import './styles.css';
 
 import Plant from '../Plant';
-
 import api from '../../services/api';
 
+const apiUrl = "http://localhost:4033";
+
 const MinhasPlants = () => {
-  
+
   const [plantas, setPlantas] = useState([]);
   const [attPage, setAttPage] = useState(false);
   const headers = {
@@ -15,58 +16,18 @@ const MinhasPlants = () => {
   }
   
   useEffect(()=>{
-    api.get('/api/plants', {headers: headers})
-      .then(function (response){
-        console.log(response);
-        setPlantas(response.data.plants);
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
-  }, [attPage]);
-  
-  function hasHours(params){
-    console.log('Params:'+params);
-    const now = new Date();
-    const waterAt = new Date(params);
-    const diff = Math.abs(now.getTime() - waterAt.getTime());
-    const hours = Math.floor(diff / (1000 * 60 * 60));
-    return hours;
-  }
+    // api.get('/api/plants', {headers: headers})
+    //   .then(function (response){
+    //     console.log(response);
+    //     setPlantas(response.data.plants);
+    //   })
+    //   .catch(function (err) {
+    //     console.log(err);
+    //   });
+    const filtro = document.getElementById('selectFiltro').value;
+    console.log('useEffect chamada');
+    if(filtro === '1' || filtro === '0'){// default: por data
 
-  async function handleArchive(id){
-    api.put('/api/plants/archive/'+id, {}, {headers: headers})
-    .then(function (response){ 
-      setAttPage(true);
-    }).catch(function (err){
-      // console.log(err);
-    });
-  }
-
-  async function handleFavorite(id){
-    api.put('/api/plants/favorite/'+id, {}, {headers: headers})
-    .then(function (response){
-      setAttPage(true);
-      document.getElementById('favoriteIcon').setAttribute('styles', 'color= #0d7');
-    }).catch(function (err){
-      // console.log(err);
-    });
-  }
-
-  async function handleAguar(id){
-    api.put('/api/plants/aguar/'+id, {}, {headers: headers})
-    .then(function (response){
-      setAttPage(true);
-    }).catch(function (err){
-      // console.log(err);
-    });
-  }
-
-  function handleFiltros(){
-    console.log('filtrando')
-    const filtro = document.getElementById('appearance-select').value;
-    console.log(filtro);
-    if(filtro === '1'){//por data
       api.get('/api/plants', {headers: headers})
         .then(function (response){
           // console.log(response);
@@ -94,13 +55,55 @@ const MinhasPlants = () => {
           // console.log(err);
         });
     }
+  }, [attPage]);
+  
+  function hasHours(params){
+    console.log('Params:'+params);
+    const now = new Date();
+    const waterAt = new Date(params);
+    const diff = Math.abs(now.getTime() - waterAt.getTime());
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    return hours;
+  }
+
+  async function handleArchive(id){
+    api.put('/api/plants/archive/'+id, {}, {headers: headers})
+    .then(function (response){ 
+      setAttPage(!attPage);
+    }).catch(function (err){
+      // console.log(err);
+    });
+  }
+
+  async function handleFavorite(id){
+    api.put('/api/plants/favorite/'+id, {}, {headers: headers})
+    .then(function (response){
+      setAttPage(!attPage);
+      document.getElementById('favoriteIcon').setAttribute('styles', 'color= #0d7');
+    }).catch(function (err){
+      // console.log(err);
+    });
+  }
+
+  async function handleAguar(id){
+    api.put('/api/plants/aguar/'+id, {}, {headers: headers})
+    .then(function (response){
+      setAttPage(!attPage);
+    }).catch(function (err){
+      // console.log(err);
+    });
+  }
+
+  function handleFiltros(){
+    console.log('filtrando')
+    setAttPage(!attPage);
   }
 
   return (
     <div className="myplants-container">
       {/* <SelectPage /> */}
-      <select id="appearance-select" onChange={handleFiltros} onSubmit={handleFiltros}>
-        <option value="" >Aplicar filtros</option>
+      <select id="selectFiltro" onChange={handleFiltros} onSubmit={handleFiltros}>
+        <option value="0" >Aplicar filtros</option>
         <option value="1" >Data de postagem crescente</option>
         <option value="2" >Favoritas</option>
         <option value="3" >Arquivadas</option>
@@ -110,7 +113,7 @@ const MinhasPlants = () => {
           <li key={plant._id}>
             <Plant plantType={plant.plantType} plantName={plant.popularName} plantID={plant._id}
               plantTime={hasHours(plant.wateredAt)} plantDate={plant.createdAt} 
-              plantImage={`http://localhost:4033/files/${plant.plantImage}`}
+              plantImage={`${apiUrl}/files/${plant.plantImage}`}
               plantArchive={()=>handleArchive(plant._id)}
               plantAguar={()=>handleAguar(plant._id)}
               plantFavorite={()=>handleFavorite(plant._id)}/>

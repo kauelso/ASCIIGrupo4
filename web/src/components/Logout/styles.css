@@ -10,6 +10,7 @@
     flex-direction: column;
     justify-content:center;
     align-items: center;
+    text-align: center;
     background-color: #323438;
     height: 350px;
     padding: 15px;
@@ -27,9 +28,10 @@ display: none;
 }
 
 .logout-container > button {
-    background-color: #0d7;
-    color: #0d0d0d;
+    background-color: #d02;
+    color: #fff;
     border: none;
     border-radius: 8px;
-    padding: 5px;
+    padding: 8px;
+    margin: 15px auto;
 }
