@@ -4,8 +4,16 @@ import './styles.css';
 import { FaFileArchive, FaHeart } from 'react-icons/fa';
 import { GiWateringCan } from 'react-icons/gi';
 
+const parseTime = function(plantDate){
+  let dia = plantDate.slice(8,10);
+  let mes = plantDate.slice(5,7);
+  let ano = plantDate.slice(0,4);
+  let time = plantDate.slice(11,16);
+  return dia+"/"+mes+"/"+ano+" "+time
+}
+
 const Plant = (props) => {
-  let parsedTime =(props.plantDate.slice(0,10) +" "+props.plantDate.slice(11,16));
+  let parsedTime = parseTime(props.plantDate);
   return (
     <div className="plant-container">
       <div className="plant-side">
