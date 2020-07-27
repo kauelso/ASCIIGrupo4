@@ -4,7 +4,7 @@ import './styles.css';
 import Plant from '../Plant';
 import api from '../../services/api';
 
-const apiUrl = "http://localhost:4033";
+const apiUrl = process.env.FRONT_ROOT_URL;
 
 const MinhasPlants = () => {
 

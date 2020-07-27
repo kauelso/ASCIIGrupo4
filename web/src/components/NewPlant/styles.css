@@ -47,6 +47,7 @@ display: none;
 
 #newplant-form > textarea {
     max-width: 450px;
+    min-width: 450px;
     width: 100%;
     min-height: 50px;
     background-color: #434548;
