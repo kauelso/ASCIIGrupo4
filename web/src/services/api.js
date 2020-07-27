@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
 
-    baseURL: "https://plantfolio.herokuapp.com/api"
+    baseURL: "https://plantfolio.herokuapp.com/"
 
 });
 // em producao colocar: baseURL: "https://plantfolio-ascii.herokuapp.com"
